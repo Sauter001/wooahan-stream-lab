@@ -1,10 +1,17 @@
 import controller.GameController;
-import ui.view.ConsoleView;
+import ui.view.common.ConsoleView;
+import ui.view.tutorial.TutorialConsoleView;
+import ui.view.tutorial.TutorialView;
 
 public class Application {
     public static void main(String[] args) {
         ConsoleView view = new ConsoleView();
-        GameController gameController = new GameController(view);
+        TutorialView tutorialView = new TutorialConsoleView();
+
+        GameController gameController = GameController.builder()
+                .view(view)
+                .tutorialView(tutorialView)
+                .build();
         gameController.run();
     }
 }

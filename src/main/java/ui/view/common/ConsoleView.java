@@ -1,0 +1,21 @@
+package ui.view.common;
+
+public class ConsoleView implements CommonView {
+    private static final String TITLE_HEADER = """
+            ╔══════════════════════════════════════════════════════╗
+            ║                                                      ║
+            ║            🧪 Welcome to Stream Lab 🧪              ║
+            ║                                                      ║
+            ║   Mastering Java Streams, One Challenge at a Time.   ║
+            ║   v1.0.0                                             ║
+            ╚══════════════════════════════════════════════════════╝
+            """;
+
+
+    @Override
+    public void showIntro() {
+        System.out.println(TITLE_HEADER);
+    }
+
+
+}
