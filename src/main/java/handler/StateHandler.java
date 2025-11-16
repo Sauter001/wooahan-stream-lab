@@ -4,5 +4,5 @@ import controller.GameController;
 import domain.GameState;
 
 public interface StateHandler {
-    GameState handle(GameController controller);
+    GameState handle();
 }

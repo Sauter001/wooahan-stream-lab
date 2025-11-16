@@ -1,13 +1,14 @@
 package domain;
 
+import config.HandlerConfig;
 import controller.GameController;
 import handler.*;
 
 import java.util.function.Consumer;
 
 public enum GameState {
-    INTRO(new IntroHandler()),
-    TUTORIAL(new TutorialHandler()),
+    INTRO(HandlerConfig.createIntroHandler()),
+    TUTORIAL(HandlerConfig.createTutorialHandler()),
     LEVEL(new LevelHandler()),
     EXIT(new ExitHandler());
 
@@ -17,7 +18,7 @@ public enum GameState {
         this.handler = handler;
     }
 
-    public GameState handle(GameController controller) {
-        return handler.handle(controller);
+    public GameState handle() {
+        return handler.handle();
     }
 }

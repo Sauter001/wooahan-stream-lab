@@ -1,6 +1,6 @@
 package ui.view.common;
 
-public class ConsoleView implements CommonView {
+public class CommonConsoleView implements CommonView {
     private static final String TITLE_HEADER = """
             ╔══════════════════════════════════════════════════════╗
             ║                                                      ║
