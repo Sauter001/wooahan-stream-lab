@@ -1,13 +1,10 @@
 package controller;
 
 import domain.GameState;
-import lombok.Builder;
 import lombok.Getter;
-import ui.view.common.CommonView;
-import ui.view.tutorial.TutorialView;
 
 @Getter
-public class GameController {
+public class GameEngine {
     private GameState gameState;
 
     public void run() {

@@ -10,9 +10,9 @@ import java.util.List;
 @EqualsAndHashCode
 @Getter
 class Book {
-    String title;
-    List<Author> authors; // N:M (공저자)
-    int publishYear;
-    double price;
-    Genre genre;
+    private final String title;
+    private final List<Author> authors; // N:M (공저자)
+    private final int publishYear;
+    private final double price;
+    private final Genre genre;
 }

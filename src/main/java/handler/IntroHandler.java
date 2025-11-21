@@ -1,6 +1,5 @@
 package handler;
 
-import controller.GameController;
 import domain.GameState;
 import lombok.RequiredArgsConstructor;
 import ui.view.common.CommonView;

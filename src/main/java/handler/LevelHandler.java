@@ -1,6 +1,5 @@
 package handler;
 
-import controller.GameController;
 import domain.GameState;
 
 public class LevelHandler  implements StateHandler {

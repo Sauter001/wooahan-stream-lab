@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @EqualsAndHashCode
 @Getter
 class Author {
+    private final int id;
     private final String name;
     private final int birthYear;
     private final String nationality;

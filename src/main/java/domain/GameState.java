@@ -1,10 +1,7 @@
 package domain;
 
 import config.HandlerConfig;
-import controller.GameController;
 import handler.*;
-
-import java.util.function.Consumer;
 
 public enum GameState {
     INTRO(HandlerConfig.createIntroHandler()),

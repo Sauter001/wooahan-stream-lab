@@ -13,8 +13,12 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.assertj:assertj-core:3.24.2'
-    
-    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+
     implementation 'com.github.javaparser:javaparser-symbol-solver-core:3.27.1'
 
     compileOnly("org.projectlombok:lombok:1.18.42")
