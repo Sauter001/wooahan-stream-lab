@@ -1,5 +1,6 @@
 package solutions.tutorial;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tutorial {
@@ -11,8 +12,12 @@ public class Tutorial {
      */
     public static List<Integer> findEvenNumbers(List<Integer> numbers) {
 //        throw new UnsupportedOperationException("구현 필요");
-        return numbers.stream()
-                .filter(n -> n % 2 == 0)
-                .toList();
+        List<Integer> evenNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            if (number % 2 == 0) {
+                evenNumbers.add(number);
+            }
+        }
+        return evenNumbers;
     }
 }

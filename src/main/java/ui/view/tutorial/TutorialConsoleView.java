@@ -2,6 +2,7 @@ package ui.view.tutorial;
 
 import constants.DirectoryConstants;
 import constants.OutputConstants;
+import util.Console;
 
 public class TutorialConsoleView implements TutorialView {
 
@@ -56,10 +57,28 @@ public class TutorialConsoleView implements TutorialView {
         System.out.println(OutputConstants.DIVISOR);
         System.out.println("""
                 문제: 주어진 리스트에서 짝수만 걸러낸 리스트를 구하세요.
-                
+
                 입력: [1, 2, 3, 4, 5, 6]
                 출력: [2, 4, 6]
                 """);
         System.out.printf("%s 파일을 수정하고 저장하세요.\n", DirectoryConstants.TUTORIAL_PATH);
+    }
+
+    @Override
+    public void waitForExit() {
+        System.out.println("\n" + OutputConstants.DIVISOR);
+        System.out.println("종료하려면 'exit'를 입력하세요. (파일 감시 중...)");
+
+        while (true) {
+            String input = Console.readLine().trim().toLowerCase();
+            if (isExitCommand(input)) {
+                System.out.println("튜토리얼을 종료합니다.");
+                break;
+            }
+        }
+    }
+
+    private static boolean isExitCommand(String input) {
+        return input.equals("exit") || input.toLowerCase().startsWith("e");
     }
 }

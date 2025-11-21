@@ -11,7 +11,7 @@ public class BlockLambdaValidator implements Validator {
                 .stream()
                 .anyMatch(lambda -> lambda.getBody().isBlockStmt());
 
-        if (!hasBlockLambda) {
+        if (hasBlockLambda) {
             return ValidationResult.error("블록 대신 표현식 하나로 사용하기");
         }
 
