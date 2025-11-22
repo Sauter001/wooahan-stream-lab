@@ -1,0 +1,236 @@
+{
+  "level": 2,
+  "masterData": {
+    "students": [
+      {"id": 1, "name": "김철수", "grade": 1, "subject": "MATH", "score": 85, "gender": "M"},
+      {"id": 2, "name": "이영희", "grade": 2, "subject": "MATH", "score": 92, "gender": "F"},
+      {"id": 3, "name": "박민수", "grade": 1, "subject": "ENGLISH", "score": 78, "gender": "M"},
+      {"id": 4, "name": "최지원", "grade": 2, "subject": "SCIENCE", "score": 95, "gender": "F"},
+      {"id": 5, "name": "정다은", "grade": 3, "subject": "MATH", "score": 88, "gender": "F"},
+      {"id": 6, "name": "강호진", "grade": 1, "subject": "SCIENCE", "score": 72, "gender": "M"},
+      {"id": 7, "name": "윤서아", "grade": 3, "subject": "ENGLISH", "score": 91, "gender": "F"},
+      {"id": 8, "name": "임재현", "grade": 2, "subject": "MATH", "score": 65, "gender": "M"},
+      {"id": 9, "name": "한소희", "grade": 1, "subject": "SCIENCE", "score": 89, "gender": "F"},
+      {"id": 10, "name": "오준혁", "grade": 3, "subject": "MATH", "score": 77, "gender": "M"},
+      {"id": 11, "name": "서예진", "grade": 2, "subject": "ENGLISH", "score": 94, "gender": "F"},
+      {"id": 12, "name": "장동건", "grade": 1, "subject": "MATH", "score": 82, "gender": "M"},
+      {"id": 13, "name": "문채원", "grade": 3, "subject": "SCIENCE", "score": 96, "gender": "F"},
+      {"id": 14, "name": "배수지", "grade": 2, "subject": "MATH", "score": 73, "gender": "F"},
+      {"id": 15, "name": "조인성", "grade": 1, "subject": "ENGLISH", "score": 68, "gender": "M"},
+      {"id": 16, "name": "김태희", "grade": 3, "subject": "MATH", "score": 99, "gender": "F"},
+      {"id": 17, "name": "이민호", "grade": 2, "subject": "SCIENCE", "score": 81, "gender": "M"},
+      {"id": 18, "name": "박보영", "grade": 1, "subject": "MATH", "score": 87, "gender": "F"},
+      {"id": 19, "name": "송중기", "grade": 3, "subject": "ENGLISH", "score": 79, "gender": "M"},
+      {"id": 20, "name": "전지현", "grade": 2, "subject": "MATH", "score": 93, "gender": "F"},
+      {"id": 21, "name": "공유", "grade": 1, "subject": "SCIENCE", "score": 84, "gender": "M"},
+      {"id": 22, "name": "손예진", "grade": 3, "subject": "MATH", "score": 90, "gender": "F"},
+      {"id": 23, "name": "현빈", "grade": 2, "subject": "ENGLISH", "score": 76, "gender": "M"},
+      {"id": 24, "name": "김소현", "grade": 1, "subject": "MATH", "score": 71, "gender": "F"},
+      {"id": 25, "name": "박서준", "grade": 3, "subject": "SCIENCE", "score": 88, "gender": "M"},
+      {"id": 26, "name": "아이유", "grade": 2, "subject": "MATH", "score": 97, "gender": "F"},
+      {"id": 27, "name": "강동원", "grade": 1, "subject": "ENGLISH", "score": 83, "gender": "M"},
+      {"id": 28, "name": "수지", "grade": 3, "subject": "MATH", "score": 86, "gender": "F"},
+      {"id": 29, "name": "이종석", "grade": 2, "subject": "SCIENCE", "score": 74, "gender": "M"},
+      {"id": 30, "name": "김유정", "grade": 1, "subject": "MATH", "score": 92, "gender": "F"},
+      {"id": 31, "name": "남주혁", "grade": 3, "subject": "ENGLISH", "score": 80, "gender": "M"},
+      {"id": 32, "name": "한효주", "grade": 2, "subject": "MATH", "score": 89, "gender": "F"},
+      {"id": 33, "name": "이승기", "grade": 1, "subject": "SCIENCE", "score": 75, "gender": "M"},
+      {"id": 34, "name": "신민아", "grade": 3, "subject": "MATH", "score": 94, "gender": "F"},
+      {"id": 35, "name": "정해인", "grade": 2, "subject": "ENGLISH", "score": 82, "gender": "M"},
+      {"id": 36, "name": "김고은", "grade": 1, "subject": "MATH", "score": 91, "gender": "F"},
+      {"id": 37, "name": "박형식", "grade": 3, "subject": "SCIENCE", "score": 69, "gender": "M"},
+      {"id": 38, "name": "한지민", "grade": 2, "subject": "MATH", "score": 98, "gender": "F"},
+      {"id": 39, "name": "여진구", "grade": 1, "subject": "ENGLISH", "score": 77, "gender": "M"},
+      {"id": 40, "name": "박신혜", "grade": 3, "subject": "MATH", "score": 85, "gender": "F"},
+      {"id": 41, "name": "이동욱", "grade": 2, "subject": "SCIENCE", "score": 81, "gender": "M"},
+      {"id": 42, "name": "송혜교", "grade": 1, "subject": "MATH", "score": 96, "gender": "F"},
+      {"id": 43, "name": "지창욱", "grade": 3, "subject": "ENGLISH", "score": 73, "gender": "M"},
+      {"id": 44, "name": "김지원", "grade": 2, "subject": "MATH", "score": 87, "gender": "F"},
+      {"id": 45, "name": "서강준", "grade": 1, "subject": "SCIENCE", "score": 79, "gender": "M"},
+      {"id": 46, "name": "문근영", "grade": 3, "subject": "MATH", "score": 93, "gender": "F"},
+      {"id": 47, "name": "김수현", "grade": 2, "subject": "ENGLISH", "score": 86, "gender": "M"},
+      {"id": 48, "name": "천우희", "grade": 1, "subject": "MATH", "score": 70, "gender": "F"},
+      {"id": 49, "name": "유아인", "grade": 3, "subject": "SCIENCE", "score": 84, "gender": "M"},
+      {"id": 50, "name": "김태리", "grade": 2, "subject": "MATH", "score": 95, "gender": "F"}
+    ],
+    "products": [
+      {"id": 1, "name": "노트북", "category": "ELECTRONICS", "price": 1200000, "stock": 5},
+      {"id": 2, "name": "마우스", "category": "ELECTRONICS", "price": 30000, "stock": 50},
+      {"id": 3, "name": "사과", "category": "FOOD", "price": 3000, "stock": 100},
+      {"id": 4, "name": "티셔츠", "category": "CLOTHING", "price": 25000, "stock": 30},
+      {"id": 5, "name": "키보드", "category": "ELECTRONICS", "price": 80000, "stock": 20},
+      {"id": 6, "name": "바나나", "category": "FOOD", "price": 2000, "stock": 150},
+      {"id": 7, "name": "청바지", "category": "CLOTHING", "price": 55000, "stock": 25},
+      {"id": 8, "name": "모니터", "category": "ELECTRONICS", "price": 350000, "stock": 8},
+      {"id": 9, "name": "오렌지", "category": "FOOD", "price": 4000, "stock": 80},
+      {"id": 10, "name": "운동화", "category": "CLOTHING", "price": 89000, "stock": 15}
+    ],
+    "guilds": [
+      {"id": 1, "name": "DragonSlayers", "level": 10, "region": "East"},
+      {"id": 2, "name": "ShadowWalkers", "level": 8, "region": "West"},
+      {"id": 3, "name": "IronFist", "level": 12, "region": "North"},
+      {"id": 4, "name": "PhoenixRising", "level": 15, "region": "South"},
+      {"id": 5, "name": "StormBringers", "level": 6, "region": "Central"}
+    ],
+    "items": [
+      {"id": 1, "name": "철검", "rarity": "COMMON", "price": 100, "type": "WEAPON", "power": 10},
+      {"id": 2, "name": "가죽갑옷", "rarity": "COMMON", "price": 150, "type": "ARMOR", "power": 8},
+      {"id": 3, "name": "화염검", "rarity": "RARE", "price": 500, "type": "WEAPON", "power": 25},
+      {"id": 4, "name": "미스릴갑옷", "rarity": "EPIC", "price": 2000, "type": "ARMOR", "power": 40},
+      {"id": 5, "name": "체력포션", "rarity": "COMMON", "price": 50, "type": "POTION", "power": 0},
+      {"id": 6, "name": "전설의검", "rarity": "LEGENDARY", "price": 10000, "type": "WEAPON", "power": 100},
+      {"id": 7, "name": "단검", "rarity": "COMMON", "price": 80, "type": "WEAPON", "power": 8},
+      {"id": 8, "name": "천갑옷", "rarity": "COMMON", "price": 120, "type": "ARMOR", "power": 5},
+      {"id": 9, "name": "얼음창", "rarity": "RARE", "price": 550, "type": "WEAPON", "power": 28},
+      {"id": 10, "name": "강철갑옷", "rarity": "RARE", "price": 800, "type": "ARMOR", "power": 20},
+      {"id": 11, "name": "마나포션", "rarity": "COMMON", "price": 60, "type": "POTION", "power": 0},
+      {"id": 12, "name": "번개검", "rarity": "EPIC", "price": 2500, "type": "WEAPON", "power": 45},
+      {"id": 13, "name": "용비늘갑옷", "rarity": "EPIC", "price": 3000, "type": "ARMOR", "power": 50},
+      {"id": 14, "name": "독단검", "rarity": "RARE", "price": 450, "type": "WEAPON", "power": 22},
+      {"id": 15, "name": "회복포션", "rarity": "RARE", "price": 200, "type": "POTION", "power": 0},
+      {"id": 16, "name": "어둠의검", "rarity": "LEGENDARY", "price": 12000, "type": "WEAPON", "power": 110},
+      {"id": 17, "name": "천사의갑옷", "rarity": "LEGENDARY", "price": 15000, "type": "ARMOR", "power": 90},
+      {"id": 18, "name": "뼈단검", "rarity": "COMMON", "price": 90, "type": "WEAPON", "power": 9},
+      {"id": 19, "name": "사슬갑옷", "rarity": "RARE", "price": 700, "type": "ARMOR", "power": 18},
+      {"id": 20, "name": "대형포션", "rarity": "EPIC", "price": 500, "type": "POTION", "power": 0},
+      {"id": 21, "name": "양손검", "rarity": "RARE", "price": 600, "type": "WEAPON", "power": 30},
+      {"id": 22, "name": "마법사로브", "rarity": "RARE", "price": 650, "type": "ARMOR", "power": 15},
+      {"id": 23, "name": "불사의검", "rarity": "LEGENDARY", "price": 20000, "type": "WEAPON", "power": 120},
+      {"id": 24, "name": "판금갑옷", "rarity": "EPIC", "price": 2200, "type": "ARMOR", "power": 45},
+      {"id": 25, "name": "해독제", "rarity": "COMMON", "price": 30, "type": "POTION", "power": 0},
+      {"id": 26, "name": "활", "rarity": "COMMON", "price": 110, "type": "WEAPON", "power": 12},
+      {"id": 27, "name": "가죽부츠", "rarity": "COMMON", "price": 70, "type": "ARMOR", "power": 4},
+      {"id": 28, "name": "정밀활", "rarity": "RARE", "price": 480, "type": "WEAPON", "power": 24},
+      {"id": 29, "name": "민첩부츠", "rarity": "RARE", "price": 550, "type": "ARMOR", "power": 12},
+      {"id": 30, "name": "속도포션", "rarity": "RARE", "price": 180, "type": "POTION", "power": 0},
+      {"id": 31, "name": "저격활", "rarity": "EPIC", "price": 1800, "type": "WEAPON", "power": 38},
+      {"id": 32, "name": "그림자망토", "rarity": "EPIC", "price": 2100, "type": "ARMOR", "power": 35},
+      {"id": 33, "name": "석궁", "rarity": "RARE", "price": 520, "type": "WEAPON", "power": 26},
+      {"id": 34, "name": "마법방패", "rarity": "RARE", "price": 600, "type": "ARMOR", "power": 22},
+      {"id": 35, "name": "힘의포션", "rarity": "EPIC", "price": 400, "type": "POTION", "power": 0},
+      {"id": 36, "name": "지팡이", "rarity": "COMMON", "price": 95, "type": "WEAPON", "power": 11},
+      {"id": 37, "name": "견습생로브", "rarity": "COMMON", "price": 100, "type": "ARMOR", "power": 6},
+      {"id": 38, "name": "화염지팡이", "rarity": "RARE", "price": 580, "type": "WEAPON", "power": 27},
+      {"id": 39, "name": "현자의로브", "rarity": "EPIC", "price": 1900, "type": "ARMOR", "power": 38},
+      {"id": 40, "name": "지능포션", "rarity": "RARE", "price": 220, "type": "POTION", "power": 0},
+      {"id": 41, "name": "대마법사지팡이", "rarity": "LEGENDARY", "price": 18000, "type": "WEAPON", "power": 105},
+      {"id": 42, "name": "아크메이지로브", "rarity": "LEGENDARY", "price": 16000, "type": "ARMOR", "power": 85},
+      {"id": 43, "name": "도끼", "rarity": "COMMON", "price": 130, "type": "WEAPON", "power": 14},
+      {"id": 44, "name": "바이킹헬멧", "rarity": "RARE", "price": 420, "type": "ARMOR", "power": 16},
+      {"id": 45, "name": "전투도끼", "rarity": "RARE", "price": 540, "type": "WEAPON", "power": 29},
+      {"id": 46, "name": "철벽방패", "rarity": "EPIC", "price": 1600, "type": "ARMOR", "power": 42},
+      {"id": 47, "name": "처형자도끼", "rarity": "EPIC", "price": 2400, "type": "WEAPON", "power": 48},
+      {"id": 48, "name": "불멸의포션", "rarity": "LEGENDARY", "price": 5000, "type": "POTION", "power": 0},
+      {"id": 49, "name": "세계수지팡이", "rarity": "EPIC", "price": 2800, "type": "WEAPON", "power": 52},
+      {"id": 50, "name": "신의갑옷", "rarity": "LEGENDARY", "price": 25000, "type": "ARMOR", "power": 95}
+    ],
+    "characters": [
+      {"id": 1, "name": "전사킴", "level": 50, "characterClass": "WARRIOR", "guildId": 1, "inventoryItemIds": [1, 2, 5], "gold": 1000, "active": true},
+      {"id": 2, "name": "마법사이", "level": 45, "characterClass": "MAGE", "guildId": 1, "inventoryItemIds": [36, 37, 11], "gold": 2000, "active": true},
+      {"id": 3, "name": "궁수박", "level": 30, "characterClass": "ARCHER", "guildId": 2, "inventoryItemIds": [26, 27, 5], "gold": 500, "active": false},
+      {"id": 4, "name": "암살자최", "level": 55, "characterClass": "ASSASSIN", "guildId": null, "inventoryItemIds": [14, 32, 30], "gold": 5000, "active": true},
+      {"id": 5, "name": "힐러정", "level": 40, "characterClass": "HEALER", "guildId": 3, "inventoryItemIds": [36, 22, 15], "gold": 800, "active": true},
+      {"id": 6, "name": "초보전사", "level": 5, "characterClass": "WARRIOR", "guildId": null, "inventoryItemIds": [1], "gold": 100, "active": true},
+      {"id": 7, "name": "베테랑마법사", "level": 60, "characterClass": "MAGE", "guildId": 3, "inventoryItemIds": [41, 42, 20], "gold": 10000, "active": true},
+      {"id": 8, "name": "숙련궁수", "level": 42, "characterClass": "ARCHER", "guildId": 4, "inventoryItemIds": [28, 29, 30], "gold": 3500, "active": true},
+      {"id": 9, "name": "그림자암살자", "level": 58, "characterClass": "ASSASSIN", "guildId": 4, "inventoryItemIds": [16, 32, 35], "gold": 8000, "active": true},
+      {"id": 10, "name": "성기사", "level": 52, "characterClass": "WARRIOR", "guildId": 1, "inventoryItemIds": [3, 10, 15], "gold": 4500, "active": true},
+      {"id": 11, "name": "원소술사", "level": 48, "characterClass": "MAGE", "guildId": 2, "inventoryItemIds": [38, 39, 40], "gold": 6000, "active": false},
+      {"id": 12, "name": "명사수", "level": 35, "characterClass": "ARCHER", "guildId": 5, "inventoryItemIds": [31, 29, 5], "gold": 2200, "active": true},
+      {"id": 13, "name": "독수리암살자", "level": 38, "characterClass": "ASSASSIN", "guildId": 2, "inventoryItemIds": [7, 8, 25], "gold": 1800, "active": true},
+      {"id": 14, "name": "광전사", "level": 62, "characterClass": "WARRIOR", "guildId": 4, "inventoryItemIds": [47, 24, 35], "gold": 12000, "active": true},
+      {"id": 15, "name": "대마법사", "level": 65, "characterClass": "MAGE", "guildId": 4, "inventoryItemIds": [23, 17, 48], "gold": 20000, "active": true},
+      {"id": 16, "name": "저격수", "level": 44, "characterClass": "ARCHER", "guildId": 3, "inventoryItemIds": [33, 34, 30], "gold": 3000, "active": true},
+      {"id": 17, "name": "야행자", "level": 33, "characterClass": "ASSASSIN", "guildId": null, "inventoryItemIds": [18, 19, 11], "gold": 1500, "active": false},
+      {"id": 18, "name": "수호자", "level": 55, "characterClass": "WARRIOR", "guildId": 1, "inventoryItemIds": [12, 13, 20], "gold": 7000, "active": true},
+      {"id": 19, "name": "현자", "level": 50, "characterClass": "MAGE", "guildId": 5, "inventoryItemIds": [49, 22, 40], "gold": 5500, "active": true},
+      {"id": 20, "name": "명궁", "level": 47, "characterClass": "ARCHER", "guildId": 1, "inventoryItemIds": [28, 10, 15], "gold": 4000, "active": true},
+      {"id": 21, "name": "칼날암살자", "level": 41, "characterClass": "ASSASSIN", "guildId": 5, "inventoryItemIds": [9, 19, 30], "gold": 2800, "active": true},
+      {"id": 22, "name": "방패병", "level": 28, "characterClass": "WARRIOR", "guildId": 2, "inventoryItemIds": [43, 44, 5], "gold": 900, "active": true},
+      {"id": 23, "name": "화염술사", "level": 36, "characterClass": "MAGE", "guildId": 3, "inventoryItemIds": [38, 37, 11], "gold": 2100, "active": false},
+      {"id": 24, "name": "숲의궁수", "level": 25, "characterClass": "ARCHER", "guildId": null, "inventoryItemIds": [26, 8, 5], "gold": 600, "active": true},
+      {"id": 25, "name": "은신술사", "level": 39, "characterClass": "ASSASSIN", "guildId": 4, "inventoryItemIds": [21, 32, 25], "gold": 2500, "active": true},
+      {"id": 26, "name": "철권사", "level": 57, "characterClass": "WARRIOR", "guildId": 3, "inventoryItemIds": [45, 46, 35], "gold": 9000, "active": true},
+      {"id": 27, "name": "빙결술사", "level": 43, "characterClass": "MAGE", "guildId": 2, "inventoryItemIds": [9, 22, 15], "gold": 3200, "active": true},
+      {"id": 28, "name": "사냥꾼", "level": 31, "characterClass": "ARCHER", "guildId": 5, "inventoryItemIds": [33, 27, 11], "gold": 1200, "active": true},
+      {"id": 29, "name": "밤의추적자", "level": 46, "characterClass": "ASSASSIN", "guildId": 1, "inventoryItemIds": [14, 4, 30], "gold": 4200, "active": true},
+      {"id": 30, "name": "불멸전사", "level": 70, "characterClass": "WARRIOR", "guildId": 4, "inventoryItemIds": [6, 50, 48], "gold": 50000, "active": true}
+    ]
+  },
+  "problems": [
+    {
+      "id": "2-1-1",
+      "name": "레벨30 이상 길드 소속 캐릭터",
+      "description": "레벨 30 이상이면서 길드에 속한 캐릭터의 이름을 알파벳 순으로 반환",
+      "methodName": "getGuildMembersAboveLevel30",
+      "inputType": "characters",
+      "outputType": "List<String>",
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+          "expected": ["광전사", "그림자암살자", "대마법사", "마법사이", "명사수", "베테랑마법사", "성기사", "숙련궁수", "원소술사", "전사킴", "힐러정"]
+        }
+      ]
+    },
+    {
+      "id": "2-1-2",
+      "name": "상위 10명 평균 골드",
+      "description": "레벨이 가장 높은 상위 10명의 평균 gold를 Double로 반환",
+      "methodName": "getTop10AverageGold",
+      "inputType": "characters",
+      "outputType": "Double",
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+          "expected": 7700.0
+        }
+      ]
+    },
+    {
+      "id": "2-1-3",
+      "name": "모든 아이템 이름 합치기",
+      "description": "모든 캐릭터의 인벤토리에 있는 아이템 이름을 중복 없이 쉼표로 구분한 String 반환",
+      "methodName": "getAllItemNamesJoined",
+      "inputType": "characters",
+      "outputType": "String",
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5],
+          "expected": "가죽갑옷, 가죽부츠, 그림자망토, 독단검, 마나포션, 마법사로브, 속도포션, 지팡이, 철검, 체력포션, 활, 회복포션, 견습생로브"
+        }
+      ]
+    },
+    {
+      "id": "2-1-4",
+      "name": "실버 트로피 수상자",
+      "description": "레벨 기준 내림차순으로 4~10등에 해당하는 캐릭터 이름 목록 반환",
+      "methodName": "getSilverTrophyWinners",
+      "inputType": "characters",
+      "outputType": "List<String>",
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+          "expected": ["암살자최", "성기사", "전사킴", "원소술사", "마법사이", "숙련궁수", "힐러정"]
+        }
+      ]
+    },
+    {
+      "id": "2-2-1",
+      "name": "학년별 학생 그룹화",
+      "description": "학생들을 학년별로 그룹화하여 Map<Integer, List<String>> 반환 (이름 리스트)",
+      "methodName": "groupStudentsByGrade",
+      "inputType": "students",
+      "outputType": "Map<Integer, List<String>>",
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "expected": {
+            "1": ["김철수", "박민수", "강호진", "한소희"],
+            "2": ["이영희", "최지원", "임재현"],
+            "3": ["정다은", "윤서아", "오준혁"]
+          }
+        }
+      ]
+    }
+  ]
+}

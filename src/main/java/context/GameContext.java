@@ -1,6 +1,7 @@
 package context;
 
 import domain.GameState;
+import lombok.Getter;
 import tools.watcher.FileWatcher;
 import tools.watcher.GraderObserver;
 import tools.watcher.TutorialGraderObserver;
@@ -13,16 +14,13 @@ public class GameContext {
     private final FileWatcher fileWatcher;
     private final GradingView gradingView;
     private GraderObserver currentObserver;
+    @Getter
     private volatile boolean tutorialCompleted = false;
 
     public GameContext() {
         // 솔루션 파일들의 기본 경로
         this.fileWatcher = new FileWatcher(Paths.get("src/main/java/solutions"));
         this.gradingView = new GradingConsoleView();
-    }
-
-    public boolean isTutorialCompleted() {
-        return tutorialCompleted;
     }
 
     public void setTutorialCompleted(boolean completed) {
