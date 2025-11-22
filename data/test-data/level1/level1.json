@@ -205,6 +205,7 @@
       "methodName": "filterHighScoreStudents",
       "inputType": "students",
       "outputType": "List<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -219,6 +220,7 @@
       "methodName": "getGrade2StudentNames",
       "inputType": "students",
       "outputType": "Set<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
@@ -233,6 +235,7 @@
       "methodName": "filterHighScoreFemaleStudents",
       "inputType": "students",
       "outputType": "List<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -247,6 +250,7 @@
       "methodName": "getActiveCharacterNames",
       "inputType": "characters",
       "outputType": "List<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -261,6 +265,7 @@
       "methodName": "sortByLevelDesc",
       "inputType": "characters",
       "outputType": "List<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7],
@@ -275,6 +280,7 @@
       "methodName": "getDistinctGuildNames",
       "inputType": "characters",
       "outputType": "List<String>",
+      "validation": { "maxVariables": 0 },
       "testCases": [
         {
           "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

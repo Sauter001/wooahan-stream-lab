@@ -58,6 +58,39 @@ public class LevelTestData {
 
         @JsonProperty("testCases")
         private List<TestCase> testCases;
+
+        @JsonProperty("validation")
+        private ValidationConfig validation;
+
+        /**
+         * validation이 null이면 기본값 반환 (헬퍼 메소드 0개, 변수 선언 0개)
+         */
+        public ValidationConfig getValidationOrDefault() {
+            return validation != null ? validation : ValidationConfig.strictDefault();
+        }
+    }
+
+    /**
+     * 문제별 validation 설정
+     * - maxVariables: 허용되는 변수 선언 수 (기본 0, 순수 return 한 줄)
+     *
+     * 헬퍼 메소드가 필요한 경우 인터페이스/유틸 클래스로 제공됨
+     */
+    @Getter
+    @Setter
+    public static class ValidationConfig {
+        @JsonProperty("maxVariables")
+        private int maxVariables = 0;
+
+        public static ValidationConfig strictDefault() {
+            return new ValidationConfig();
+        }
+
+        public static ValidationConfig of(int maxVariables) {
+            ValidationConfig config = new ValidationConfig();
+            config.maxVariables = maxVariables;
+            return config;
+        }
     }
 
     @Getter
