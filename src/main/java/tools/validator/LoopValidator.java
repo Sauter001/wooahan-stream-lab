@@ -13,12 +13,12 @@ public class LoopValidator implements Validator {
 
     private static boolean isWhileDetected(AnalysisContext context) {
         // while, do-while 문 검증
-        return !context.findAll(WhileStmt.class).isEmpty() && context.findAll(DoStmt.class).isEmpty();
+        return !context.findAll(WhileStmt.class).isEmpty() || !context.findAll(DoStmt.class).isEmpty();
     }
 
     private static boolean isForDetected(AnalysisContext context) {
         // for, for-each 문 검증
-        return !context.findAll(ForStmt.class).isEmpty() && !context.findAll(ForEachStmt.class).isEmpty();
+        return !context.findAll(ForStmt.class).isEmpty() || !context.findAll(ForEachStmt.class).isEmpty();
     }
 
     @Override
