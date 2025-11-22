@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FileWatcher implements Runnable {
+    private static final long DUPLICATE_EVENT_THRESHOLD_MS = 500;
+
     private final Path directoryToWatch;
     private final List<GraderObserver> observers;
+    private final Map<Path, Long> lastEventTimeMap = new ConcurrentHashMap<>();
     private volatile boolean running = true;
 
     public FileWatcher(Path directoryToWatch) {
@@ -91,8 +96,24 @@ public class FileWatcher implements Runnable {
     }
 
     private void notifyObservers(Path filePath) {
+        if (isDuplicateEvent(filePath)) {
+            return;
+        }
+
         for (GraderObserver observer : observers) {
             observer.onFileChanged(filePath);
         }
+    }
+
+    private boolean isDuplicateEvent(Path filePath) {
+        long now = System.currentTimeMillis();
+        Long lastTime = lastEventTimeMap.get(filePath);
+
+        if (lastTime != null && (now - lastTime) < DUPLICATE_EVENT_THRESHOLD_MS) {
+            return true;
+        }
+
+        lastEventTimeMap.put(filePath, now);
+        return false;
     }
 }
