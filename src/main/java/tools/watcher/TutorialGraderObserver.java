@@ -10,9 +10,13 @@ import tools.validator.NoVariableDeclarationValidator;
 import tools.validator.SingleStatementValidator;
 import ui.view.grading.GradingView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -87,6 +91,13 @@ public class TutorialGraderObserver implements GraderObserver {
 
         view.displayGradingStart(filePath.getFileName().toString());
 
+        // 소스 파일 컴파일
+        if (!compileSource()) {
+            System.err.println("❌ 컴파일 실패. 문법 오류를 확인하세요.");
+            isGrading.set(false);
+            return;
+        }
+
         int totalMethods = testData.getMethods().size();
         int completedMethods = 0;
 
@@ -138,12 +149,51 @@ public class TutorialGraderObserver implements GraderObserver {
         }
     }
 
+    private boolean compileSource() {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            String gradleCommand = os.contains("win") ? "gradlew.bat" : "./gradlew";
+
+            ProcessBuilder pb = new ProcessBuilder(gradleCommand, "compileJava", "-q");
+            pb.redirectErrorStream(true);
+            pb.directory(new File(System.getProperty("user.dir")));
+
+            Process process = pb.start();
+
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line).append("\n");
+                }
+            }
+
+            int exitCode = process.waitFor();
+
+            if (exitCode != 0) {
+                System.err.println(output.toString().trim());
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("❌ 컴파일 프로세스 실행 실패: " + e.getMessage());
+            return false;
+        }
+    }
+
     private int runTestCases(TutorialTestData.MethodTest methodTest) {
         int passed = 0;
         int testNum = 1;
 
         try {
-            ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+            String classFilePath = TUTORIAL_CLASS.replace('.', '/') + ".class";
+            Path classesDir = Paths.get("build/classes/java/main").toAbsolutePath();
+            Path classFile = classesDir.resolve(classFilePath);
+
+            byte[] classBytes = Files.readAllBytes(classFile);
+            ByteArrayClassLoader classLoader = new ByteArrayClassLoader(getClass().getClassLoader(), TUTORIAL_CLASS, classBytes);
+
             Class<?> tutorialClass = classLoader.loadClass(TUTORIAL_CLASS);
             Method method = tutorialClass.getMethod(methodTest.getName(), List.class);
 
@@ -172,7 +222,6 @@ public class TutorialGraderObserver implements GraderObserver {
             System.err.println("❌ 오류: Tutorial 클래스를 찾을 수 없습니다. 프로젝트가 컴파일되었는지 확인하세요.");
         } catch (Exception e) {
             System.err.println("❌ 테스트 케이스 실행 중 오류 발생: " + e.getMessage());
-            e.printStackTrace();
         }
 
         return passed;

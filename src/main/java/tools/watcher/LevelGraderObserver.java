@@ -6,8 +6,12 @@ import tools.grader.level.LevelGrader;
 import tools.grader.level.LevelTestData;
 import ui.view.grading.LevelGradingView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -26,8 +30,9 @@ public class LevelGraderObserver implements GraderObserver {
     private final GameContext gameContext;
     private final ScheduledExecutorService scheduler;
     private final String expectedFileName;
-    private ScheduledFuture<?> pendingGrade;
     private final AtomicBoolean isGrading = new AtomicBoolean(false);
+    private ScheduledFuture<?> pendingGrade;
+    private ClassLoader previousClassLoader = null;
 
     public LevelGraderObserver(int level, LevelGradingView view, GameContext gameContext) {
         this.level = level;
@@ -77,6 +82,12 @@ public class LevelGraderObserver implements GraderObserver {
         try {
             view.displayGradingStart(filePath.getFileName().toString());
 
+            // 소스 파일 컴파일
+            if (!compileSource()) {
+                System.err.println("❌ 컴파일 실패. 문법 오류를 확인하세요.");
+                return;
+            }
+
             Class<?> solutionClass = loadSolutionClass();
             File sourceFile = filePath.toFile();
 
@@ -112,16 +123,70 @@ public class LevelGraderObserver implements GraderObserver {
         } catch (ClassNotFoundException e) {
             System.err.println("❌ Level" + level + " 클래스를 찾을 수 없습니다. 프로젝트가 컴파일되었는지 확인하세요.");
         } catch (Exception e) {
-            System.err.println("❌ 채점 중 오류 발생: " + e.getMessage());
-            e.printStackTrace();
+            String msg = e.getMessage();
+            if (msg != null && msg.contains("컴파일")) {
+                System.err.println("❌ " + msg);
+            } else {
+                System.err.println("❌ 채점 중 오류 발생: " + msg);
+            }
         } finally {
             isGrading.set(false);
         }
     }
 
-    private Class<?> loadSolutionClass() throws ClassNotFoundException {
+    private boolean compileSource() {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            String gradleCommand = os.contains("win") ? "gradlew.bat" : "./gradlew";
+
+            ProcessBuilder pb = new ProcessBuilder(gradleCommand, "compileJava", "-q");
+            pb.redirectErrorStream(true);
+            pb.directory(new File(System.getProperty("user.dir")));
+
+            Process process = pb.start();
+
+            // 컴파일 에러 출력 읽기
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line).append("\n");
+                }
+            }
+
+            int exitCode = process.waitFor();
+
+            if (exitCode != 0) {
+                System.err.println(output.toString().trim());
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("❌ 컴파일 프로세스 실행 실패: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private Class<?> loadSolutionClass() throws Exception {
+        cleanUpClassLoader();
+
         String className = String.format(SOLUTION_CLASS_PATTERN, level, level);
-        return ClassLoader.getSystemClassLoader().loadClass(className);
+        String classFilePath = className.replace('.', '/') + ".class";
+
+        Path classesDir = Paths.get("build/classes/java/main").toAbsolutePath();
+        Path classFile = classesDir.resolve(classFilePath);
+
+        // .class 파일 바이트를 직접 읽어서 캐싱 문제 방지
+        byte[] classBytes = Files.readAllBytes(classFile);
+
+        previousClassLoader = new ByteArrayClassLoader(getClass().getClassLoader(), className, classBytes);
+        return previousClassLoader.loadClass(className);
+    }
+
+    private void cleanUpClassLoader() {
+        // ByteArrayClassLoader는 close가 필요 없음
+        previousClassLoader = null;
     }
 
     private void displayTestResults(LevelTestData.Problem problem, LevelGrader.GradeResult result) {
@@ -129,9 +194,9 @@ public class LevelGraderObserver implements GraderObserver {
         for (LevelTestData.TestCase testCase : problem.getTestCases()) {
             boolean passed = testNum <= result.passedTests();
             view.displayTestCaseResult(testNum, passed,
-                testCase.getInputIds() != null ? testCase.getInputIds() : "all",
-                testCase.getExpected(),
-                passed ? testCase.getExpected() : "실패");
+                    testCase.getInputIds() != null ? testCase.getInputIds() : "all",
+                    testCase.getExpected(),
+                    passed ? testCase.getExpected() : "실패");
             testNum++;
         }
     }
@@ -150,4 +215,5 @@ public class LevelGraderObserver implements GraderObserver {
             Thread.currentThread().interrupt();
         }
     }
+
 }

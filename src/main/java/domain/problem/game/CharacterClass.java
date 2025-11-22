@@ -4,7 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum CharacterClass {
-    WARRIOR("Warrior"), MAGE("Mage"), ARCHER("Archer");
+    ARCHER("Archer"),
+    ASSASSIN("Assassin"),
+    HEALER("Healer"),
+    MAGE("Mage"),
+    WARRIOR("Warrior");
 
     private final String name;
 

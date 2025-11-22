@@ -124,20 +124,26 @@ public class LevelGrader {
             return assembled;
         }
 
-        Set<Long> idSet = new HashSet<>(inputIds);
+        // JSON 파싱 시 Integer로 들어올 수 있으므로 Long으로 변환
+        Set<Long> idSet = new HashSet<>();
+        for (Object id : (List<?>) inputIds) {
+            idSet.add(((Number) id).longValue());
+        }
+
         List<T> filtered = new ArrayList<>();
 
         for (int i = 0; i < dataList.size(); i++) {
             try {
                 // D has getId() method via reflection
                 Method getIdMethod = dataList.get(i).getClass().getMethod("getId");
-                Long id = (Long) getIdMethod.invoke(dataList.get(i));
+                Object idObj = getIdMethod.invoke(dataList.get(i));
+                Long id = (idObj instanceof Number) ? ((Number) idObj).longValue() : (Long) idObj;
                 if (idSet.contains(id)) {
                     filtered.add(assembled.get(i));
                 }
             } catch (Exception e) {
                 // fallback: use index-based
-                if (i < inputIds.size() && idSet.contains((long) (i + 1))) {
+                if (idSet.contains((long) (i + 1))) {
                     filtered.add(assembled.get(i));
                 }
             }
@@ -153,7 +159,12 @@ public class LevelGrader {
             return allCharacters;
         }
 
-        Set<Long> idSet = new HashSet<>(inputIds);
+        // JSON 파싱 시 Integer로 들어올 수 있으므로 Long으로 변환
+        Set<Long> idSet = new HashSet<>();
+        for (Object id : (List<?>) inputIds) {
+            idSet.add(((Number) id).longValue());
+        }
+
         return allCharacters.stream()
                 .filter(c -> idSet.contains(c.getId()))
                 .toList();
