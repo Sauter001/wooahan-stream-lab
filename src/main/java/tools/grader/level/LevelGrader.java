@@ -1,0 +1,238 @@
+package tools.grader.level;
+
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import domain.AnalysisContext;
+import domain.validation.ValidationResult;
+import domain.validation.factory.ViolationFactory;
+import tools.validator.CompositeValidator;
+import tools.validator.MaxVariableDeclarationValidator;
+import tools.validator.Validator;
+
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.*;
+
+/**
+ * Level 문제 채점기
+ * - Validator로 코드 구조 검증
+ * - 리플렉션으로 메소드 실행 후 expected와 비교
+ */
+public class LevelGrader {
+    private final LevelTestData levelTestData;
+    private final TestDataAssembler assembler;
+    private final int level;
+
+    public LevelGrader(LevelTestData levelTestData) {
+        this.levelTestData = levelTestData;
+        this.assembler = new TestDataAssembler();
+        this.level = levelTestData.getLevel();
+    }
+
+    /**
+     * 특정 문제 채점
+     */
+    public GradeResult gradeProblem(LevelTestData.Problem problem, File sourceFile, Class<?> solutionClass) {
+        // 1. Validator 구성
+        Validator validator = createValidator(problem);
+
+        // 2. 코드 구조 검증
+        ValidationResult validationResult = validateCode(sourceFile, validator);
+        if (!(validationResult instanceof ValidationResult.Ok)) {
+            return new GradeResult(problem.getId(), validationResult, 0, problem.getTestCases().size());
+        }
+
+        // 3. 테스트 케이스 실행
+        int passedTests = runTestCases(problem, solutionClass);
+        int totalTests = problem.getTestCases().size();
+
+        return new GradeResult(problem.getId(), validationResult, passedTests, totalTests);
+    }
+
+    private Validator createValidator(LevelTestData.Problem problem) {
+        LevelTestData.ValidationConfig config = problem.getValidationOrDefault();
+
+        CompositeValidator validator = ViolationFactory.createStrictestValidator();
+
+        // maxVariables 설정에 따른 Validator 추가
+        validator.add(new MaxVariableDeclarationValidator(config.getMaxVariables()));
+
+        return validator;
+    }
+
+    private ValidationResult validateCode(File sourceFile, Validator validator) {
+        try {
+            JavaParser parser = new JavaParser();
+            CompilationUnit cu = parser.parse(sourceFile).getResult().orElseThrow();
+            AnalysisContext context = new AnalysisContext(cu);
+            return validator.validate(context);
+        } catch (Exception e) {
+            return ValidationResult.error("파일 파싱 실패: " + e.getMessage());
+        }
+    }
+
+    private int runTestCases(LevelTestData.Problem problem, Class<?> solutionClass) {
+        int passed = 0;
+
+        for (LevelTestData.TestCase testCase : problem.getTestCases()) {
+            try {
+                Object input = prepareInput(problem.getInputType(), testCase);
+                Object expected = convertExpected(problem.getOutputType(), testCase.getExpected());
+
+                Method method = findMethod(solutionClass, problem.getMethodName());
+                Object actual = method.invoke(null, input);
+
+                if (compareResults(expected, actual)) {
+                    passed++;
+                }
+            } catch (Exception e) {
+                // 테스트 실패
+            }
+        }
+
+        return passed;
+    }
+
+    private Object prepareInput(String inputType, LevelTestData.TestCase testCase) {
+        LevelTestData.MasterData masterData = levelTestData.getMasterData();
+        List<Long> inputIds = testCase.getInputIds();
+
+        return switch (inputType.toLowerCase()) {
+            case "students" -> filterById(
+                    assembler.assembleStudents(masterData.getStudents()),
+                    masterData.getStudents(),
+                    inputIds
+            );
+            case "products" -> filterById(
+                    assembler.assembleProducts(masterData.getProducts()),
+                    masterData.getProducts(),
+                    inputIds
+            );
+            case "characters" -> filterCharactersById(masterData, inputIds);
+            case "orders" -> filterById(
+                    assembler.assembleOrders(masterData.getOrders()),
+                    masterData.getOrders(),
+                    inputIds
+            );
+            default -> testCase.getInputRaw();
+        };
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T, D> List<T> filterById(List<T> assembled, List<D> dataList, List<Long> inputIds) {
+        if (inputIds == null || inputIds.isEmpty()) {
+            return assembled;
+        }
+
+        Set<Long> idSet = new HashSet<>(inputIds);
+        List<T> filtered = new ArrayList<>();
+
+        for (int i = 0; i < dataList.size(); i++) {
+            try {
+                // D has getId() method via reflection
+                Method getIdMethod = dataList.get(i).getClass().getMethod("getId");
+                Long id = (Long) getIdMethod.invoke(dataList.get(i));
+                if (idSet.contains(id)) {
+                    filtered.add(assembled.get(i));
+                }
+            } catch (Exception e) {
+                // fallback: use index-based
+                if (i < inputIds.size() && idSet.contains((long) (i + 1))) {
+                    filtered.add(assembled.get(i));
+                }
+            }
+        }
+
+        return filtered;
+    }
+
+    private List<?> filterCharactersById(LevelTestData.MasterData masterData, List<Long> inputIds) {
+        var allCharacters = assembler.assembleCharacters(masterData);
+
+        if (inputIds == null || inputIds.isEmpty()) {
+            return allCharacters;
+        }
+
+        Set<Long> idSet = new HashSet<>(inputIds);
+        return allCharacters.stream()
+                .filter(c -> idSet.contains(c.getId()))
+                .toList();
+    }
+
+    private Method findMethod(Class<?> clazz, String methodName) throws NoSuchMethodException {
+        for (Method method : clazz.getMethods()) {
+            if (method.getName().equals(methodName)) {
+                return method;
+            }
+        }
+        throw new NoSuchMethodException("Method not found: " + methodName);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Object convertExpected(String outputType, Object expected) {
+        if (expected instanceof List<?> list) {
+            if (outputType.contains("Set")) {
+                return new HashSet<>(list);
+            }
+            return list;
+        }
+        if (expected instanceof Map<?, ?> map && outputType.contains("Map")) {
+            // JSON의 Map 키는 String이므로, 필요시 Integer로 변환
+            if (outputType.contains("Map<Integer")) {
+                Map<Integer, Object> converted = new HashMap<>();
+                for (Map.Entry<?, ?> entry : map.entrySet()) {
+                    Integer key = Integer.parseInt(entry.getKey().toString());
+                    converted.put(key, entry.getValue());
+                }
+                return converted;
+            }
+            return map;
+        }
+        return expected;
+    }
+
+    private boolean compareResults(Object expected, Object actual) {
+        if (expected == null && actual == null) return true;
+        if (expected == null || actual == null) return false;
+
+        // Set 비교
+        if (expected instanceof Set && actual instanceof Set) {
+            return expected.equals(actual);
+        }
+
+        // List 비교 (순서 무관하게 비교할지는 문제에 따라 다름)
+        if (expected instanceof List && actual instanceof List) {
+            return expected.equals(actual);
+        }
+
+        // Map 비교
+        if (expected instanceof Map && actual instanceof Map) {
+            return expected.equals(actual);
+        }
+
+        // 일반 비교
+        return expected.equals(actual);
+    }
+
+    /**
+     * 채점 결과
+     */
+    public record GradeResult(
+            String problemId,
+            ValidationResult validationResult,
+            int passedTests,
+            int totalTests
+    ) {
+        public boolean isValid() {
+            return validationResult instanceof ValidationResult.Ok;
+        }
+
+        public boolean allTestsPassed() {
+            return passedTests == totalTests;
+        }
+
+        public boolean isComplete() {
+            return isValid() && allTestsPassed();
+        }
+    }
+}
