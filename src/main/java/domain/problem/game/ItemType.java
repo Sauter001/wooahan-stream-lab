@@ -9,6 +9,6 @@ public enum ItemType {
     private final String name;
 
     ItemType(String name) {
-        this.name = name();
+        this.name = name;
     }
 }
