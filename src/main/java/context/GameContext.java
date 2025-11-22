@@ -18,7 +18,6 @@ public class GameContext {
     private volatile boolean tutorialCompleted = false;
 
     public GameContext() {
-        // 솔루션 파일들의 기본 경로
         this.fileWatcher = new FileWatcher(Paths.get("src/main/java/solutions"));
         this.gradingView = new GradingConsoleView();
     }

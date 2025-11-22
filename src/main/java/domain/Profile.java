@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -16,6 +18,8 @@ public class Profile {
     private String userName;
     private boolean tutorialSkipped;
     private Map<String, Boolean> levelDialogueShown;
+    private Set<Integer> passedLevels;
+    private int currentLevel;
     private boolean secretUnlocked;
 
     public static Profile createNew(String userName) {
@@ -23,6 +27,8 @@ public class Profile {
                 .userName(userName)
                 .tutorialSkipped(false)
                 .levelDialogueShown(new HashMap<>())
+                .passedLevels(new HashSet<>())
+                .currentLevel(1)
                 .secretUnlocked(false)
                 .build();
     }
@@ -37,6 +43,17 @@ public class Profile {
 
     public boolean isLevelDialogueShown(String levelId) {
         return levelDialogueShown.getOrDefault(levelId, false);
+    }
+
+    public void passLevel(int level) {
+        this.passedLevels.add(level);
+        if (level >= currentLevel) {
+            this.currentLevel = level + 1;
+        }
+    }
+
+    public boolean hasPassedLevel(int level) {
+        return passedLevels.contains(level);
     }
 
     public void unlockSecret() {
