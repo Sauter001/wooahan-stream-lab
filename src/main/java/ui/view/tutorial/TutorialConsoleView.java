@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 
 public class TutorialConsoleView implements TutorialView {
 
+    public static final String TUTORIAL_SECRET_PIECE = "0x74546F75";
+
     private static void displayBasicStreamExamples() throws InterruptedException {
         System.out.println("""
                 예를 들어, 이런 코드 대신:
@@ -121,7 +123,7 @@ public class TutorialConsoleView implements TutorialView {
 
     private void displayCompletionAndTransition() {
         try {
-            System.out.println("\n" + OutputConstants.DIVISOR);
+            System.out.println("\n" + OutputConstants.DIVISOR + TUTORIAL_SECRET_PIECE);
             System.out.println("축하합니다! 튜토리얼을 완료했습니다!");
             Thread.sleep(OutputConstants.DEFAULT_DIALOGUE_TIME);
             System.out.println("메인 메뉴로 이동합니다...");

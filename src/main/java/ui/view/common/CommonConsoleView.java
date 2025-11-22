@@ -4,10 +4,10 @@ public class CommonConsoleView implements CommonView {
     private static final String TITLE_HEADER = """
             ╔══════════════════════════════════════════════════════╗
             ║                                                      ║
-            ║            🧪 Welcome to Stream Lab 🧪              ║
+            ║             🧪 Welcome to Stream Lab 🧪             ║
             ║                                                      ║
             ║   Mastering Java Streams, One Challenge at a Time.   ║
-            ║   v1.0.0                                             ║
+            ║   v1.0.0 0x646F4E6F                                  ║
             ╚══════════════════════════════════════════════════════╝
             """;
 
