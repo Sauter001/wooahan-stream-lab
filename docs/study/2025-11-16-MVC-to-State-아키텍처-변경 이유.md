@@ -27,8 +27,8 @@ public enum GameState {
     
     private final StateHandler handler;
     
-    public GameState handle(GameController controller) {
-        return handler.handle(controller);
+    public GameState handle(GameController engine) {
+        return handler.handle(engine);
     }
 }
 

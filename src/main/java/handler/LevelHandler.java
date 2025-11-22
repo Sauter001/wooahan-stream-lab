@@ -1,5 +1,6 @@
 package handler;
 
+import context.GameContext;
 import domain.GameState;
 import domain.Profile;
 import domain.level.LevelInfo;
@@ -24,6 +25,12 @@ public class LevelHandler implements StateHandler {
     public GameState handle() {
         Profile profile = profileRepository.load().orElseThrow();
         int currentLevel = profile.getCurrentLevel();
+
+        // GameContext에 현재 레벨 설정 (Observer 생성 시 사용)
+        GameContext context = GameState.getContext();
+        if (context != null) {
+            context.setCurrentLevel(currentLevel);
+        }
 
         LevelInfo levelInfo = LevelInfo.ofLevel(currentLevel);
         String levelKey = "level" + currentLevel;

@@ -2,28 +2,45 @@ package context;
 
 import domain.GameState;
 import lombok.Getter;
+import lombok.Setter;
 import tools.watcher.FileWatcher;
 import tools.watcher.GraderObserver;
+import tools.watcher.LevelGraderObserver;
 import tools.watcher.TutorialGraderObserver;
 import ui.view.grading.GradingConsoleView;
 import ui.view.grading.GradingView;
+import ui.view.grading.LevelGradingConsoleView;
+import ui.view.grading.LevelGradingView;
 
 import java.nio.file.Paths;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GameContext {
     private final FileWatcher fileWatcher;
     private final GradingView gradingView;
+    private final LevelGradingView levelGradingView;
     private GraderObserver currentObserver;
+    @Setter
     @Getter
     private volatile boolean tutorialCompleted = false;
+    private final Map<Integer, Boolean> levelCompletedMap = new ConcurrentHashMap<>();
+    @Setter
+    @Getter
+    private int currentLevel = 1;
 
     public GameContext() {
         this.fileWatcher = new FileWatcher(Paths.get("src/main/java/solutions"));
         this.gradingView = new GradingConsoleView();
+        this.levelGradingView = new LevelGradingConsoleView();
     }
 
-    public void setTutorialCompleted(boolean completed) {
-        this.tutorialCompleted = completed;
+    public void setLevelCompleted(int level, boolean completed) {
+        levelCompletedMap.put(level, completed);
+    }
+
+    public boolean isLevelCompleted(int level) {
+        return levelCompletedMap.getOrDefault(level, false);
     }
 
     public void startWatcher() {
@@ -45,8 +62,8 @@ public class GameContext {
                 fileWatcher.addObserver(currentObserver);
             }
             case LEVEL -> {
-                // TODO: Level observer 구현
-                System.out.println("레벨 Observer가 아직 구현되지 않았습니다");
+                currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this);
+                fileWatcher.addObserver(currentObserver);
             }
             case MAIN -> {
                 // Main menu에서는 Observer가 필요하지 않음
@@ -61,9 +78,10 @@ public class GameContext {
         if (currentObserver != null) {
             fileWatcher.removeObserver(currentObserver);
 
-            // TutorialGraderObserver인 경우 리소스 정리
             if (currentObserver instanceof TutorialGraderObserver tutorialObserver) {
                 tutorialObserver.shutdown();
+            } else if (currentObserver instanceof LevelGraderObserver levelObserver) {
+                levelObserver.shutdown();
             }
 
             currentObserver = null;

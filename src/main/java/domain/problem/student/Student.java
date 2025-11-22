@@ -1,11 +1,13 @@
 package domain.problem.student;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
+@Builder
 @EqualsAndHashCode
 public class Student {
     private final String name;

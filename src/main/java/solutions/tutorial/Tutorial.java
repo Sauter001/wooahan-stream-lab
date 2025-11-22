@@ -1,6 +1,5 @@
 package solutions.tutorial;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Tutorial {
