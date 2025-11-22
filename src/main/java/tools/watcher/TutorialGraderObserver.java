@@ -100,7 +100,6 @@ public class TutorialGraderObserver implements GraderObserver {
         // 모든 메서드가 완료되면 튜토리얼 완료 표시
         if (completedMethods == totalMethods) {
             gameContext.setTutorialCompleted(true);
-            System.out.println("\n🎉 튜토리얼을 모두 완료했습니다! 메인 메뉴로 이동하려면 'exit'를 입력하세요.");
         }
 
         isGrading.set(false);

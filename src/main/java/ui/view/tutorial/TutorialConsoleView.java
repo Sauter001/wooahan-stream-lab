@@ -2,7 +2,12 @@ package ui.view.tutorial;
 
 import constants.DirectoryConstants;
 import constants.OutputConstants;
+import context.GameContext;
 import util.Console;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class TutorialConsoleView implements TutorialView {
 
@@ -65,20 +70,56 @@ public class TutorialConsoleView implements TutorialView {
     }
 
     @Override
-    public void waitForExit() {
+    public void waitForExitOrCompletion(GameContext context) {
         System.out.println("\n" + OutputConstants.DIVISOR);
-        System.out.println("종료하려면 'exit'를 입력하세요. (파일 감시 중...)");
+        System.out.println("파일을 수정하고 저장하세요. (파일 감시 중...)");
+        System.out.println("종료하려면 'exit'를 입력하세요.");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            String input = Console.readLine().trim().toLowerCase();
-            if (isExitCommand(input)) {
-                System.out.println("튜토리얼을 종료합니다.");
+            // 튜토리얼 완료 체크
+            if (context.isTutorialCompleted()) {
+                displayCompletionAndTransition();
+                break;
+            }
+
+            // 논블로킹 입력 체크
+            try {
+                if (reader.ready()) {
+                    String input = reader.readLine();
+                    if (input != null && isExitCommand(input.trim().toLowerCase())) {
+                        System.out.println("튜토리얼을 종료합니다.");
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                // 입력 읽기 실패 시 무시
+            }
+
+            // CPU 과부하 방지
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 break;
             }
         }
     }
 
+    private void displayCompletionAndTransition() {
+        try {
+            System.out.println("\n" + OutputConstants.DIVISOR);
+            System.out.println("축하합니다! 튜토리얼을 완료했습니다!");
+            Thread.sleep(OutputConstants.DEFAULT_DIALOGUE_TIME);
+            System.out.println("메인 메뉴로 이동합니다...");
+            Thread.sleep(OutputConstants.SHORT_DIALOGUE_TIME);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     private static boolean isExitCommand(String input) {
-        return input.equals("exit") || input.toLowerCase().startsWith("e");
+        return input.equals("exit") || input.startsWith("e");
     }
 }

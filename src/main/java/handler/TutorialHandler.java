@@ -14,13 +14,14 @@ public class TutorialHandler implements StateHandler {
     // Observer 교체는 GameState.handle()에서 자동으로 처리
     @Override
     public GameState handle() {
+        GameContext context = GameState.getContext();
+
         view.showTutorialIntro();
 
-        // 사용자가 종료할 때까지 대기
-        view.waitForExit();
+        // 튜토리얼 완료 또는 사용자 종료까지 대기
+        view.waitForExitOrCompletion(context);
 
         // 튜토리얼 완료 여부 확인
-        GameContext context = GameState.getContext();
         if (context != null && context.isTutorialCompleted()) {
             return GameState.MAIN;
         }
