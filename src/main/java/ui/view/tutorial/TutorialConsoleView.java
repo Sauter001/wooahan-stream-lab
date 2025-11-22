@@ -49,11 +49,23 @@ public class TutorialConsoleView implements TutorialView {
     public void showTutorialIntro() {
         try {
             displayHeader();
+            displayRules();
             displayBasicStreamExamples();
             displayTutorialProblem();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    private void displayRules() throws InterruptedException {
+        System.out.println("""
+                📋 규칙은 간단해요:
+                  • for문, while문 사용 금지!
+                  • 오직 Stream API만 사용하세요.
+
+                파일을 저장하면 자동으로 채점됩니다.
+                """);
+        Thread.sleep(OutputConstants.DEFAULT_DIALOGUE_TIME);
     }
 
     private void displayTutorialProblem() throws InterruptedException {

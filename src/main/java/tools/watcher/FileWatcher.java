@@ -33,9 +33,6 @@ public class FileWatcher implements Runnable {
             // 디렉토리와 하위 디렉토리 등록
             registerRecursive(directoryToWatch, watchService);
 
-            System.out.println("👀 파일 감시 중: " + directoryToWatch);
-            System.out.println("Tutorial.java를 수정하면 자동으로 채점이 시작됩니다.\n");
-
             while (running) {
                 WatchKey key;
                 try {

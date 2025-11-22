@@ -12,6 +12,6 @@ public class IntroHandler implements StateHandler {
     public GameState handle() {
         view.showIntro();
 
-        return GameState.TUTORIAL;
+        return GameState.PROFILE;
     }
 }

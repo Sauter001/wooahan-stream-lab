@@ -54,7 +54,7 @@ public class GameContext {
             case MAIN -> {
                 // Main menu에서는 Observer가 필요하지 않음
             }
-            case INTRO, EXIT -> {
+            case INTRO, PROFILE, EXIT -> {
                 // Observer가 필요하지 않음
             }
         }

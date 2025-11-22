@@ -6,6 +6,7 @@ import handler.*;
 
 public enum GameState {
     INTRO(HandlerConfig.createIntroHandler()),
+    PROFILE(HandlerConfig.createProfileHandler()),
     TUTORIAL(HandlerConfig.createTutorialHandler()),
     MAIN(HandlerConfig.createMainHandler()),
     LEVEL(new LevelHandler()),
