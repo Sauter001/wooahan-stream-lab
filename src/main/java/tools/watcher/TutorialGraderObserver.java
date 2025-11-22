@@ -1,6 +1,7 @@
 package tools.watcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import context.GameContext;
 import domain.validation.factory.ViolationFactory;
 import tools.grader.TutorialGrader;
 import tools.grader.TutorialTestData;
@@ -17,20 +18,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TutorialGraderObserver implements GraderObserver {
     private static final String TUTORIAL_CLASS = "solutions.tutorial.Tutorial";
     private static final String TEST_DATA_PATH = "data/test-data/tutorial/tutorial.json";
     private static final long DEBOUNCE_DELAY_SECONDS = 2;
+    public static final String TUTORIAL_JAVA_FILE = "Tutorial.java";
 
     private final TutorialTestData testData;
     private final CompositeValidator validator;
     private final ScheduledExecutorService scheduler;
     private final GradingView view;
+    private final GameContext gameContext;
     private ScheduledFuture<?> pendingGrade;
+    private final AtomicBoolean isGrading = new AtomicBoolean(false);
 
-    public TutorialGraderObserver(GradingView view) {
+    public TutorialGraderObserver(GradingView view, GameContext gameContext) {
         this.view = view;
+        this.gameContext = gameContext;
         try {
             // 테스트 데이터 로드
             ObjectMapper mapper = new ObjectMapper();
@@ -57,7 +63,7 @@ public class TutorialGraderObserver implements GraderObserver {
         String fileName = filePath.getFileName().toString();
 
         // Tutorial.java만 처리
-        if (!fileName.equals("Tutorial.java")) {
+        if (!fileName.equals(TUTORIAL_JAVA_FILE)) {
             return;
         }
 
@@ -75,15 +81,32 @@ public class TutorialGraderObserver implements GraderObserver {
     }
 
     private void executeGrading(Path filePath) {
+        if (!isGrading.compareAndSet(false, true)) {
+            return;
+        }
+
         view.displayGradingStart(filePath.getFileName().toString());
+
+        int totalMethods = testData.getMethods().size();
+        int completedMethods = 0;
 
         // 각 메서드 채점
         for (TutorialTestData.MethodTest methodTest : testData.getMethods()) {
-            gradeMethod(methodTest, filePath.toFile());
+            if (gradeMethod(methodTest, filePath.toFile())) {
+                completedMethods++;
+            }
         }
+
+        // 모든 메서드가 완료되면 튜토리얼 완료 표시
+        if (completedMethods == totalMethods) {
+            gameContext.setTutorialCompleted(true);
+            System.out.println("\n🎉 튜토리얼을 모두 완료했습니다! 메인 메뉴로 이동하려면 'exit'를 입력하세요.");
+        }
+
+        isGrading.set(false);
     }
 
-    private void gradeMethod(TutorialTestData.MethodTest methodTest, File sourceFile) {
+    private boolean gradeMethod(TutorialTestData.MethodTest methodTest, File sourceFile) {
         view.displayMethodHeader(methodTest.getName(), methodTest.getDescription());
 
         try {
@@ -96,7 +119,7 @@ public class TutorialGraderObserver implements GraderObserver {
             // 검증 실패 시 에러 표시하고 테스트 건너뛰기
             if (!gradeResult.isValid()) {
                 view.displayFinalResult(gradeResult, 0, methodTest.getTestCases().size());
-                return;
+                return false;
             }
 
             // 테스트 케이스 실행
@@ -106,9 +129,13 @@ public class TutorialGraderObserver implements GraderObserver {
             // 결과 표시
             view.displayFinalResult(gradeResult, passedTests, totalTests);
 
+            // 모든 테스트 통과 시 true 반환
+            return passedTests == totalTests;
+
         } catch (Exception e) {
             System.err.println("❌ 메서드 채점 중 오류 발생 " + methodTest.getName() + ": " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
     }
 

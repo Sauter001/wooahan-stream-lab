@@ -12,12 +12,8 @@ public class Tutorial {
      */
     public static List<Integer> findEvenNumbers(List<Integer> numbers) {
 //        throw new UnsupportedOperationException("구현 필요");
-        List<Integer> evenNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            if (number % 2 == 0) {
-                evenNumbers.add(number);
-            }
-        }
-        return evenNumbers;
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .toList();
     }
 }

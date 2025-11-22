@@ -7,6 +7,7 @@ import handler.*;
 public enum GameState {
     INTRO(HandlerConfig.createIntroHandler()),
     TUTORIAL(HandlerConfig.createTutorialHandler()),
+    MAIN(HandlerConfig.createMainHandler()),
     LEVEL(new LevelHandler()),
     EXIT(new ExitHandler());
 
@@ -19,6 +20,10 @@ public enum GameState {
 
     public static void initContext(GameContext context) {
         gameContext = context;
+    }
+
+    public static GameContext getContext() {
+        return gameContext;
     }
 
     public GameState handle() {
