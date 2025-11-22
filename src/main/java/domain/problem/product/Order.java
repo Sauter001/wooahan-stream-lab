@@ -9,11 +9,11 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Getter
-class Order {
-    private String orderId;
-    private String productName;
-    private int quantity;
-    private int price;
-    private String customerName;
-    private LocalDate orderDate;
+public class Order {
+    private final String orderId;
+    private final String productName;
+    private final int quantity;
+    private final int price;
+    private final String customerName;
+    private final LocalDate orderDate;
 }

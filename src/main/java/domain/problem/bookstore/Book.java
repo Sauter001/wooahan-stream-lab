@@ -9,7 +9,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Getter
-class Book {
+public class Book {
     private final String title;
     private final List<Author> authors; // N:M (공저자)
     private final int publishYear;

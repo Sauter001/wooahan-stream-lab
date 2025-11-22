@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Getter
-class Product {
-    private String name;
-    private ProductCategory category;  // Electronics, Food, Clothing
-    private int price;
-    private int stock;
+public class Product {
+    private final String name;
+    private final ProductCategory category;  // Electronics, Food, Clothing
+    private final int price;
+    private final int stock;
 }

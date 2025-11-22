@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Getter
-class Guild {
-    private Long id;
-    private String name;
-    private int level;
-    private String region;
+public class Guild {
+    private final Long id;
+    private final String name;
+    private final int level;
+    private final String region;
 }

@@ -9,8 +9,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Getter
-class BookUser {
-    String username;
-    int age;
-    List<Book> readBooks;
+public class BookUser {
+    private final String username;
+    private final int age;
+    private final List<Book> readBooks;
 }
