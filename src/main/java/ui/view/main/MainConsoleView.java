@@ -6,81 +6,60 @@ import java.util.List;
 
 public class MainConsoleView implements MainView {
 
+    private static final String BORDER = "═".repeat(50);
+
     @Override
     public void showMainMenu(MainMenuData data) {
-        printTopBorder();
+        System.out.println();
         printTitle();
-        printMiddleBorder();
+        printBorder();
         printPlayerInfo(data);
-        printProgressBar(data.progressPercent());
-        printMiddleBorder();
-        printLevelList(data.levels());
-        printMiddleBorder();
-        printCommands();
-        printBottomBorder();
+        printBorder();
+        printLevelList(data.levels(), data.secretUnlocked());
+        printBorder();
+        printCommands(data.secretUnlocked());
+        System.out.println();
         printPrompt();
     }
 
-    private void printTopBorder() {
-        System.out.println("╔═══════════════════════════════════════════════════════╗");
-    }
-
     private void printTitle() {
-        System.out.println("║                    MAIN MENU                          ║");
+        System.out.println("                 MAIN MENU");
+        System.out.println();
     }
 
-    private void printMiddleBorder() {
-        System.out.println("╠═══════════════════════════════════════════════════════╣");
-    }
-
-    private void printBottomBorder() {
-        System.out.println("╚═══════════════════════════════════════════════════════╝");
+    private void printBorder() {
+        System.out.println(BORDER);
     }
 
     private void printPlayerInfo(MainMenuData data) {
-        String line = String.format("║ Player: %-20s        Points: %-6d ║",
-                data.playerName(), data.points());
-        System.out.println(line);
+        System.out.printf("  Player: %s%n", data.playerName());
     }
 
-    private void printProgressBar(int percent) {
-        int filled = percent / 5;  // 20 chars total for 100%
-        int empty = 20 - filled;
-        String bar = "█".repeat(filled) + "░".repeat(empty);
-        String line = String.format("║ 진행도: %s %3d%%                     ║", bar, percent);
-        System.out.println(line);
-    }
-
-    private void printLevelList(List<MainMenuData.LevelInfo> levels) {
-        System.out.println("║                                                       ║");
+    private void printLevelList(List<MainMenuData.LevelInfo> levels, boolean secretUnlocked) {
+        System.out.println();
         for (MainMenuData.LevelInfo level : levels) {
             printLevelLine(level);
         }
-        System.out.println("║                                                       ║");
+        if (secretUnlocked) {
+            System.out.println("  💀 Secret Phase - Hell Mode");
+        }
+        System.out.println();
     }
 
     private void printLevelLine(MainMenuData.LevelInfo level) {
-        String icon = getStatusIcon(level.status());
-        String score = level.score() != null ? String.format("(%s)", level.score()) : "";
-        String line = String.format("║ %s %-40s %7s ║", icon, level.name(), score);
-        System.out.println(line);
+        String icon = level.completed() ? "✅" : "🔒";
+        System.out.printf("  %s %s%n", icon, level.name());
     }
 
-    private String getStatusIcon(MainMenuData.LevelStatus status) {
-        return switch (status) {
-            case COMPLETED -> "✅";
-            case IN_PROGRESS -> "\uD83C\uDFAE";
-            case LOCKED -> "\uD83D\uDD12";
-            case SECRET_LOCKED -> "\uD83D\uDD12 \uD83D\uDC80";
-        };
-    }
-
-    private void printCommands() {
-        System.out.println("║ [P] 플레이  [A] 도전과제    [E] Exit                   ║");
+    private void printCommands(boolean secretUnlocked) {
+        if (secretUnlocked) {
+            System.out.println("  [P] 플레이  [S] Secret  [A] 도전과제  [E] Exit");
+        } else {
+            System.out.println("  [P] 플레이  [A] 도전과제  [E] Exit");
+        }
     }
 
     private void printPrompt() {
-        System.out.println();
         System.out.print("원하는 명령을 선택하세요. : ");
     }
 

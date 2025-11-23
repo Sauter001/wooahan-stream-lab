@@ -27,7 +27,7 @@ public class HandlerConfig {
     }
 
     public static MainHandler createMainHandler() {
-        return new MainHandler(new MainConsoleView());
+        return new MainHandler(new MainConsoleView(), new ProfileRepository());
     }
 
     public static LevelHandler createLevelHandler() {
