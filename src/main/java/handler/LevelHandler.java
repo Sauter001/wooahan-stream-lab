@@ -26,10 +26,11 @@ public class LevelHandler implements StateHandler {
         Profile profile = profileRepository.load().orElseThrow();
         int currentLevel = profile.getCurrentLevel();
 
-        // GameContext에 현재 레벨 설정 (Observer 생성 시 사용)
+        // GameContext에 현재 레벨 설정 후 Observer 등록
         GameContext context = GameState.getContext();
         if (context != null) {
             context.setCurrentLevel(currentLevel);
+            context.setupLevelObserver();
         }
 
         LevelInfo levelInfo = LevelInfo.ofLevel(currentLevel);

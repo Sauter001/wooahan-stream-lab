@@ -62,8 +62,7 @@ public class GameContext {
                 fileWatcher.addObserver(currentObserver);
             }
             case LEVEL -> {
-                currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this);
-                fileWatcher.addObserver(currentObserver);
+                // LEVEL은 LevelHandler에서 setCurrentLevel 후 setupLevelObserver() 호출
             }
             case MAIN -> {
                 // Main menu에서는 Observer가 필요하지 않음
@@ -72,6 +71,12 @@ public class GameContext {
                 // Observer가 필요하지 않음
             }
         }
+    }
+
+    public void setupLevelObserver() {
+        clearCurrentObserver();
+        currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this);
+        fileWatcher.addObserver(currentObserver);
     }
 
     private void clearCurrentObserver() {
