@@ -5,8 +5,20 @@ import domain.level.LevelInfo;
 import util.Console;
 
 import java.util.List;
+import java.util.Map;
 
 public class LevelConsoleView implements LevelView {
+
+    private static final int MAX_LEVEL = 5;
+
+    // Secret Phase 힌트용 Hex 코드
+    private static final Map<Integer, String> LEVEL_SECRET_PIECES = Map.of(
+            1, "0x63682D3E",   // "ch->"
+            2, "0x66696228",   // "fib("
+            3, "0x37295B31",   // "7)[1"
+            4, "0x2C312C32",   // ",1,2"
+            5, "0x2C332C355D"  // ",3,5]"
+    );
 
     @Override
     public void showLevelIntro(LevelInfo levelInfo, boolean showDialogue) {
@@ -86,9 +98,21 @@ public class LevelConsoleView implements LevelView {
         System.out.println("═".repeat(50));
         System.out.printf("  🎉 Level %d 완료!%n", completedLevel);
         System.out.println("═".repeat(50));
+
+        // Secret Phase 힌트 출력
+        String secretPiece = LEVEL_SECRET_PIECES.get(completedLevel);
+        if (secretPiece != null) {
+            System.out.printf("  [System Code: %s]%n", secretPiece);
+        }
+
         System.out.println();
-        System.out.println("  1. [N] 다음 레벨로 (Level " + (completedLevel + 1) + ")");
-        System.out.println("  2. [M] 메인 화면으로");
+        if (completedLevel < MAX_LEVEL) {
+            System.out.println("  1. [N] 다음 레벨로 (Level " + (completedLevel + 1) + ")");
+            System.out.println("  2. [M] 메인 화면으로");
+        } else {
+            System.out.println("  모든 레벨을 완료했습니다!");
+            System.out.println("  [M] 메인 화면으로");
+        }
         System.out.println();
         System.out.print("> ");
     }
