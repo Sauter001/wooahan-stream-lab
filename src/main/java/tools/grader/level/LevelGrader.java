@@ -36,8 +36,8 @@ public class LevelGrader {
         // 1. Validator 구성
         Validator validator = createValidator(problem);
 
-        // 2. 코드 구조 검증
-        ValidationResult validationResult = validateCode(sourceFile, validator);
+        // 2. 코드 구조 검증 (해당 메서드만)
+        ValidationResult validationResult = validateMethod(sourceFile, problem.getMethodName(), validator);
         if (!(validationResult instanceof ValidationResult.Ok)) {
             return new GradeResult(problem.getId(), validationResult, 0, problem.getTestCases().size());
         }
@@ -60,11 +60,11 @@ public class LevelGrader {
         return validator;
     }
 
-    private ValidationResult validateCode(File sourceFile, Validator validator) {
+    private ValidationResult validateMethod(File sourceFile, String methodName, Validator validator) {
         try {
             JavaParser parser = new JavaParser();
             CompilationUnit cu = parser.parse(sourceFile).getResult().orElseThrow();
-            AnalysisContext context = new AnalysisContext(cu);
+            AnalysisContext context = AnalysisContext.forMethod(cu, methodName);
             return validator.validate(context);
         } catch (Exception e) {
             return ValidationResult.error("파일 파싱 실패: " + e.getMessage());
@@ -247,3 +247,7 @@ public class LevelGrader {
         }
     }
 }
+
+
+
+

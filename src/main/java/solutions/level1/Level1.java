@@ -68,6 +68,7 @@ public class Level1 {
      * @return 대문자로 변환된 상품 이름 리스트
      */
     public static List<String> getUpperCaseProductNames(List<Product> products) {
+        int x = 1;
         return products.stream()
                 .map(p -> p.getName().toUpperCase())
                 .toList();

@@ -5,6 +5,7 @@ import context.GameContext;
 import tools.grader.level.LevelGrader;
 import tools.grader.level.LevelTestData;
 import ui.view.grading.LevelGradingView;
+import ui.view.grading.LevelGradingView.ProblemGradeResult;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +13,8 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -93,30 +96,20 @@ public class LevelGraderObserver implements GraderObserver {
 
             LevelGrader grader = new LevelGrader(testData);
 
-            int totalProblems = testData.getProblems().size();
-            int passedProblems = 0;
+            // 모든 문제 채점 결과 수집
+            List<ProblemGradeResult> results = new ArrayList<>();
 
             for (LevelTestData.Problem problem : testData.getProblems()) {
-                LevelGrader.GradeResult result = grader.gradeProblem(problem, sourceFile, solutionClass);
-
-                view.displayProblemHeader(problem.getId(), problem.getMethodName());
-                view.displayValidationResult(result.validationResult());
-
-                if (result.isValid()) {
-                    view.displayTestStart();
-                    displayTestResults(problem, result);
-                }
-
-                view.displayProblemResult(result);
-
-                if (result.isComplete()) {
-                    passedProblems++;
-                }
+                LevelGrader.GradeResult gradeResult = grader.gradeProblem(problem, sourceFile, solutionClass);
+                results.add(new ProblemGradeResult(problem, gradeResult));
             }
 
-            view.displayLevelSummary(totalProblems, passedProblems);
+            // 컴팩트 결과 출력
+            view.displayCompactResults(level, results);
 
-            if (passedProblems == totalProblems) {
+            // 레벨 완료 체크
+            long passedCount = results.stream().filter(ProblemGradeResult::isComplete).count();
+            if (passedCount == results.size()) {
                 gameContext.setLevelCompleted(level, true);
             }
 
@@ -187,18 +180,6 @@ public class LevelGraderObserver implements GraderObserver {
     private void cleanUpClassLoader() {
         // ByteArrayClassLoader는 close가 필요 없음
         previousClassLoader = null;
-    }
-
-    private void displayTestResults(LevelTestData.Problem problem, LevelGrader.GradeResult result) {
-        int testNum = 1;
-        for (LevelTestData.TestCase testCase : problem.getTestCases()) {
-            boolean passed = testNum <= result.passedTests();
-            view.displayTestCaseResult(testNum, passed,
-                    testCase.getInputIds() != null ? testCase.getInputIds() : "all",
-                    testCase.getExpected(),
-                    passed ? testCase.getExpected() : "실패");
-            testNum++;
-        }
     }
 
     public void shutdown() {
