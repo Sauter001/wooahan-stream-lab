@@ -2,12 +2,10 @@ package solutions.level1;
 
 import domain.problem.game.GameCharacter;
 import domain.problem.product.Product;
-import domain.problem.student.Gender;
 import domain.problem.student.Student;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Level 1 - 기본 연산: filter, map, collect
@@ -30,10 +28,7 @@ public class Level1 {
      * @return 학생들의 이름
      */
     public static List<String> filterHighScoreStudents(List<Student> students) {
-        return students.stream()
-                .filter(student -> student.getScore() >= 80)
-                .map(Student::getName)
-                .toList();
+        throw new UnsupportedOperationException("구현 필요");
     }
 
     /**
@@ -43,10 +38,7 @@ public class Level1 {
      * @return 학생 이름으로 구성된 set
      */
     public static Set<String> getGrade2StudentNames(List<Student> students) {
-        return students.stream()
-                .filter(s -> s.getGrade() == 2)
-                .map(Student::getName)
-                .collect(Collectors.toSet());
+        throw new UnsupportedOperationException("구현 필요");
     }
 
     /**
@@ -55,11 +47,7 @@ public class Level1 {
      * @return 점수가 90점 이상인 여학생 리스트
      */
     public static List<String> filterHighScoreFemaleStudents(List<Student> students) {
-        return students.stream()
-                .filter(s -> s.getGender() ==  Gender.FEMALE)
-                .filter(s -> s.getScore() >= 90)
-                .map(Student::getName)
-                .toList();
+        throw new UnsupportedOperationException("구현 필요");
     }
 
     /**
@@ -68,10 +56,7 @@ public class Level1 {
      * @return 대문자로 변환된 상품 이름 리스트
      */
     public static List<String> getUpperCaseProductNames(List<Product> products) {
-        int x = 1;
-        return products.stream()
-                .map(p -> p.getName().toUpperCase())
-                .toList();
+        throw new UnsupportedOperationException("구현 필요");
     }
 
     /**
