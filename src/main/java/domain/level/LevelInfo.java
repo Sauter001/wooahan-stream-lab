@@ -36,13 +36,11 @@ public record LevelInfo(
             case 2 -> new LevelInfo(
                     2,
                     "Level 2 - 중급 메서드",
-                    "flatMap, skip, 복잡한 filter와 groupingBy를 배웁니다",
+                    "flatMap, skip, 복잡한 filter를 배웁니다",
                     List.of(
                             "flatMap()으로 중첩 구조 평탄화",
                             "skip()과 limit() 조합으로 페이징",
-                            "여러 조건을 조합한 복잡한 필터링",
-                            "Collectors.groupingBy()로 그룹화",
-                            "Collectors.averagingInt()로 평균 계산"
+                            "여러 조건을 조합한 복잡한 필터링"
                     ),
                     """
                     Level 1을 훌륭하게 통과하셨네요!
@@ -51,9 +49,7 @@ public record LevelInfo(
 
                     flatMap()은 중첩된 구조를 평탄화할 때 사용하고,
                     skip()과 limit()를 조합하면 페이징 처리가 가능합니다.
-
-                    그리고 Collectors의 다양한 메서드들도 만나보실 거예요.
-                    groupingBy()로 데이터를 그룹화하는 건 정말 강력한 기능입니다!
+                    
                     """
             );
             case 3 -> new LevelInfo(
