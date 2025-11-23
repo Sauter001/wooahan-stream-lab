@@ -1,0 +1,164 @@
+{
+  "level": 3,
+  "masterData": {
+    "students": [
+      { "id": 1, "name": "김철수", "grade": 1, "subject": "MATH", "score": 85, "gender": "MALE" },
+      { "id": 2, "name": "이영희", "grade": 2, "subject": "MATH", "score": 92, "gender": "FEMALE" },
+      { "id": 3, "name": "박민수", "grade": 1, "subject": "ENGLISH", "score": 78, "gender": "MALE" },
+      { "id": 4, "name": "최지원", "grade": 2, "subject": "SCIENCE", "score": 95, "gender": "FEMALE" },
+      { "id": 5, "name": "정다은", "grade": 3, "subject": "MATH", "score": 88, "gender": "FEMALE" },
+      { "id": 6, "name": "강호진", "grade": 1, "subject": "SCIENCE", "score": 72, "gender": "MALE" },
+      { "id": 7, "name": "윤서아", "grade": 3, "subject": "ENGLISH", "score": 91, "gender": "FEMALE" },
+      { "id": 8, "name": "임재현", "grade": 2, "subject": "MATH", "score": 65, "gender": "MALE" },
+      { "id": 9, "name": "한소희", "grade": 1, "subject": "SCIENCE", "score": 89, "gender": "FEMALE" },
+      { "id": 10, "name": "오준혁", "grade": 3, "subject": "MATH", "score": 77, "gender": "MALE" },
+      { "id": 11, "name": "서예진", "grade": 2, "subject": "ENGLISH", "score": 94, "gender": "FEMALE" },
+      { "id": 12, "name": "장동건", "grade": 1, "subject": "MATH", "score": 82, "gender": "MALE" },
+      { "id": 13, "name": "문채원", "grade": 3, "subject": "SCIENCE", "score": 96, "gender": "FEMALE" },
+      { "id": 14, "name": "배수지", "grade": 2, "subject": "MATH", "score": 73, "gender": "FEMALE" },
+      { "id": 15, "name": "조인성", "grade": 1, "subject": "ENGLISH", "score": 68, "gender": "MALE" }
+    ],
+    "products": [
+      { "id": 1, "name": "Laptop", "category": "ELECTRONICS", "price": 1200000, "stock": 5 },
+      { "id": 2, "name": "Laptop", "category": "ELECTRONICS", "price": 1500000, "stock": 3 },
+      { "id": 3, "name": "Mouse", "category": "ELECTRONICS", "price": 30000, "stock": 50 },
+      { "id": 4, "name": "Mouse", "category": "ELECTRONICS", "price": 45000, "stock": 30 },
+      { "id": 5, "name": "Apple", "category": "FOOD", "price": 3000, "stock": 100 },
+      { "id": 6, "name": "Apple", "category": "FOOD", "price": 4000, "stock": 80 },
+      { "id": 7, "name": "T-Shirt", "category": "CLOTHING", "price": 25000, "stock": 30 },
+      { "id": 8, "name": "T-Shirt", "category": "CLOTHING", "price": 35000, "stock": 20 },
+      { "id": 9, "name": "Keyboard", "category": "ELECTRONICS", "price": 80000, "stock": 20 },
+      { "id": 10, "name": "Banana", "category": "FOOD", "price": 2000, "stock": 150 },
+      { "id": 11, "name": "Jeans", "category": "CLOTHING", "price": 55000, "stock": 25 },
+      { "id": 12, "name": "Monitor", "category": "ELECTRONICS", "price": 350000, "stock": 8 }
+    ]
+  },
+  "problems": [
+    {
+      "id": "3-1-1",
+      "name": "학년별 학생 그룹화",
+      "description": "학년별로 학생 이름을 그룹화하여 Map<Integer, List<String>> 반환",
+      "methodName": "groupStudentNamesByGrade",
+      "inputType": "students",
+      "outputType": "Map<Integer, List<String>>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "expected": {
+            "1": ["김철수", "박민수", "강호진", "한소희"],
+            "2": ["이영희", "최지원", "임재현"],
+            "3": ["정다은", "윤서아", "오준혁"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "3-1-2",
+      "name": "과목별 평균 점수",
+      "description": "학생들의 과목별 평균 점수를 Map<String, Double>로 반환",
+      "methodName": "getAverageScoreBySubject",
+      "inputType": "students",
+      "outputType": "Map<String, Double>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "expected": {
+            "Math": 81.4,
+            "English": 84.5,
+            "Science": 85.33333333333333
+          }
+        }
+      ]
+    },
+    {
+      "id": "3-1-3",
+      "name": "학년별 과목별 학생 수",
+      "description": "학년별로 각 과목의 학생 수를 Map<Integer, Map<String, Long>>로 반환",
+      "methodName": "countStudentsByGradeAndSubject",
+      "inputType": "students",
+      "outputType": "Map<Integer, Map<String, Long>>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "expected": {
+            "1": {"Math": 1, "English": 1, "Science": 2},
+            "2": {"Math": 2, "Science": 1},
+            "3": {"Math": 2, "English": 1}
+          }
+        }
+      ]
+    },
+    {
+      "id": "3-1-4",
+      "name": "80점 기준 학생 분할",
+      "description": "점수가 80점 이상/미만인 학생 이름으로 분할하여 Map<Boolean, List<String>> 반환",
+      "methodName": "partitionStudentNamesByScore80",
+      "inputType": "students",
+      "outputType": "Map<Boolean, List<String>>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "expected": {
+            "true": ["김철수", "이영희", "최지원", "정다은", "윤서아", "한소희"],
+            "false": ["박민수", "강호진", "임재현", "오준혁"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "3-2-1",
+      "name": "상품명별 최고 가격",
+      "description": "동일 상품명 중 가장 비싼 가격을 Map<String, Integer>로 반환 (toMap의 mergeFunction 활용)",
+      "methodName": "getMaxPriceByProductName",
+      "inputType": "products",
+      "outputType": "Map<String, Integer>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8],
+          "expected": {
+            "Laptop": 1500000,
+            "Mouse": 45000,
+            "Apple": 4000,
+            "T-Shirt": 35000
+          }
+        }
+      ]
+    },
+    {
+      "id": "3-2-2",
+      "name": "카테고리별 총 재고",
+      "description": "카테고리별 총 재고 수량을 Map<String, Integer>로 반환",
+      "methodName": "getTotalStockByCategory",
+      "inputType": "products",
+      "outputType": "Map<String, Integer>",
+      "validation": {
+        "maxVariables": 0
+      },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+          "expected": {
+            "Electronics": 116,
+            "Food": 330,
+            "Clothing": 75
+          }
+        }
+      ]
+    }
+  ]
+}
