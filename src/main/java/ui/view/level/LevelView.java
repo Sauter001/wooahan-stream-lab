@@ -9,6 +9,7 @@ public interface LevelView {
     void showLearningObjectives(LevelInfo levelInfo);
     void showProblemList(List<ProblemSummary> problems);
     void showLevelPrompt(int level);
+    void showLevelCompleteOptions(int completedLevel);
     String readCommand();
 
     record ProblemSummary(String id, String name, String description, boolean solved) {}

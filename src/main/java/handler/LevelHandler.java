@@ -48,13 +48,19 @@ public class LevelHandler implements StateHandler {
         view.showProblemList(problems);
         view.showLevelPrompt(currentLevel);
 
-        return waitForCommandOrCompletion(levelInfo);
+        return waitForCommandOrCompletion(currentLevel, levelInfo);
     }
 
-    private GameState waitForCommandOrCompletion(LevelInfo levelInfo) {
+    private GameState waitForCommandOrCompletion(int currentLevel, LevelInfo levelInfo) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        GameContext context = GameState.getContext();
 
         while (true) {
+            // 레벨 완료 체크
+            if (context != null && context.isLevelCompleted(currentLevel)) {
+                return handleLevelComplete(currentLevel, reader);
+            }
+
             try {
                 if (reader.ready()) {
                     String input = reader.readLine();
@@ -80,9 +86,35 @@ public class LevelHandler implements StateHandler {
         return GameState.MAIN;
     }
 
+    private GameState handleLevelComplete(int completedLevel, BufferedReader reader) {
+        // Profile 업데이트
+        Profile profile = profileRepository.load().orElseThrow();
+        profile.passLevel(completedLevel);
+        profileRepository.save(profile);
+
+        // 선택지 표시
+        view.showLevelCompleteOptions(completedLevel);
+
+        while (true) {
+            try {
+                String input = reader.readLine();
+                if (input != null) {
+                    String cmd = input.trim().toLowerCase();
+                    if (cmd.equals("1") || cmd.equals("n") || cmd.equals("next")) {
+                        return GameState.LEVEL;  // 다음 레벨로 (Profile.currentLevel이 이미 증가됨)
+                    } else if (cmd.equals("2") || cmd.equals("m") || cmd.equals("main")) {
+                        return GameState.MAIN;
+                    }
+                }
+            } catch (IOException e) {
+                // ignore
+            }
+        }
+    }
+
     private GameState processCommand(String command, LevelInfo levelInfo) {
         return switch (command) {
-            case "열기", "open" -> {
+            case "o", "open" -> {
                 view.showLearningObjectives(levelInfo);
                 yield null;
             }

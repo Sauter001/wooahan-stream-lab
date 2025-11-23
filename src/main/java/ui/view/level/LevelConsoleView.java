@@ -72,12 +72,25 @@ public class LevelConsoleView implements LevelView {
     @Override
     public void showLevelPrompt(int level) {
         System.out.println("──────────────────────────────────────────────────");
-        System.out.println("  [열기] 학습 목표 다시 보기");
+        System.out.println("  [O/open] 학습 목표 다시 보기");
         System.out.println("  [M/main] 메인 메뉴로 돌아가기");
         System.out.println("──────────────────────────────────────────────────");
         System.out.println();
         System.out.println("파일을 수정하고 저장하면 자동으로 채점됩니다.");
         System.out.printf("Level %d 진행 중... (파일 감시 중)%n", level);
+    }
+
+    @Override
+    public void showLevelCompleteOptions(int completedLevel) {
+        System.out.println();
+        System.out.println("═".repeat(50));
+        System.out.printf("  🎉 Level %d 완료!%n", completedLevel);
+        System.out.println("═".repeat(50));
+        System.out.println();
+        System.out.println("  1. [N] 다음 레벨로 (Level " + (completedLevel + 1) + ")");
+        System.out.println("  2. [M] 메인 화면으로");
+        System.out.println();
+        System.out.print("> ");
     }
 
     @Override
