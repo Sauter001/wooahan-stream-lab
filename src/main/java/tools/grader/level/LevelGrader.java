@@ -202,9 +202,18 @@ public class LevelGrader {
         return expected;
     }
 
+    private static final double EPSILON = 1e-6;
+
     private boolean compareResults(Object expected, Object actual) {
         if (expected == null && actual == null) return true;
         if (expected == null || actual == null) return false;
+
+        // Double 비교 (부동소수점 오차 허용)
+        if (expected instanceof Number && actual instanceof Number) {
+            double expectedVal = ((Number) expected).doubleValue();
+            double actualVal = ((Number) actual).doubleValue();
+            return Math.abs(expectedVal - actualVal) < EPSILON;
+        }
 
         // Set 비교
         if (expected instanceof Set && actual instanceof Set) {
@@ -216,13 +225,59 @@ public class LevelGrader {
             return expected.equals(actual);
         }
 
-        // Map 비교
+        // Map 비교 (중첩 Map, 숫자 타입 차이 처리)
         if (expected instanceof Map && actual instanceof Map) {
-            return expected.equals(actual);
+            return compareMaps((Map<?, ?>) expected, (Map<?, ?>) actual);
         }
 
         // 일반 비교
         return expected.equals(actual);
+    }
+
+    private boolean compareMaps(Map<?, ?> expected, Map<?, ?> actual) {
+        if (expected.size() != actual.size()) return false;
+
+        for (Map.Entry<?, ?> entry : expected.entrySet()) {
+            Object expectedKey = entry.getKey();
+            Object expectedValue = entry.getValue();
+
+            // actual에서 매칭되는 키 찾기 (숫자 타입 차이 허용)
+            Object actualValue = null;
+            boolean keyFound = false;
+
+            for (Map.Entry<?, ?> actualEntry : actual.entrySet()) {
+                if (keysMatch(expectedKey, actualEntry.getKey())) {
+                    actualValue = actualEntry.getValue();
+                    keyFound = true;
+                    break;
+                }
+            }
+
+            if (!keyFound) return false;
+            if (!compareResults(expectedValue, actualValue)) return false;
+        }
+
+        return true;
+    }
+
+    private boolean keysMatch(Object key1, Object key2) {
+        if (key1 == null && key2 == null) return true;
+        if (key1 == null || key2 == null) return false;
+
+        // 숫자 키 비교 (Integer, Long 등)
+        if (key1 instanceof Number && key2 instanceof Number) {
+            return ((Number) key1).longValue() == ((Number) key2).longValue();
+        }
+
+        // Boolean 키 비교 (String "true"/"false" vs Boolean)
+        if (key1 instanceof String && key2 instanceof Boolean) {
+            return Boolean.parseBoolean((String) key1) == (Boolean) key2;
+        }
+        if (key1 instanceof Boolean && key2 instanceof String) {
+            return (Boolean) key1 == Boolean.parseBoolean((String) key2);
+        }
+
+        return key1.equals(key2);
     }
 
     /**
