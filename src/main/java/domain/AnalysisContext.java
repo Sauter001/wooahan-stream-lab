@@ -10,13 +10,20 @@ import java.util.Optional;
 
 public class AnalysisContext {
     private final Node targetNode;
+    private final CompilationUnit compilationUnit;
 
     public AnalysisContext(CompilationUnit compilationUnit) {
         this.targetNode = compilationUnit;
+        this.compilationUnit = compilationUnit;
     }
 
     public AnalysisContext(MethodDeclaration methodDeclaration) {
         this.targetNode = methodDeclaration;
+        this.compilationUnit = methodDeclaration.findCompilationUnit().orElse(null);
+    }
+
+    public Optional<CompilationUnit> getCompilationUnit() {
+        return Optional.ofNullable(compilationUnit);
     }
 
     public <T extends Node> List<T> findAll(Class<T> nodeType) {

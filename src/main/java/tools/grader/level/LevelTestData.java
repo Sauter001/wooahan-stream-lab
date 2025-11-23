@@ -62,6 +62,9 @@ public class LevelTestData {
         @JsonProperty("validation")
         private ValidationConfig validation;
 
+        @JsonProperty("requiresToolbox")
+        private boolean requiresToolbox = false;
+
         /**
          * validation이 null이면 기본값 반환 (헬퍼 메소드 0개, 변수 선언 0개)
          */

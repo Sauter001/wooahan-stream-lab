@@ -9,6 +9,9 @@ import tools.validator.CompositeValidator;
 import tools.validator.MaxVariableDeclarationValidator;
 import tools.validator.Validator;
 
+import domain.tools.SetToolbox;
+import domain.tools.SetToolboxImpl;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -80,7 +83,15 @@ public class LevelGrader {
                 Object expected = convertExpected(problem.getOutputType(), testCase.getExpected());
 
                 Method method = findMethod(solutionClass, problem.getMethodName());
-                Object actual = method.invoke(null, input);
+
+                Object actual;
+                if (problem.isRequiresToolbox()) {
+                    // SetToolbox를 두 번째 파라미터로 주입
+                    SetToolbox<?> toolbox = new SetToolboxImpl<>();
+                    actual = method.invoke(null, input, toolbox);
+                } else {
+                    actual = method.invoke(null, input);
+                }
 
                 if (compareResults(expected, actual)) {
                     passed++;
@@ -114,6 +125,7 @@ public class LevelGrader {
                     masterData.getOrders(),
                     inputIds
             );
+            case "integerset" -> convertToIntegerSet(testCase.getInputRaw());
             default -> testCase.getInputRaw();
         };
     }
@@ -170,6 +182,20 @@ public class LevelGrader {
                 .toList();
     }
 
+    @SuppressWarnings("unchecked")
+    private Set<Integer> convertToIntegerSet(Object inputRaw) {
+        if (inputRaw instanceof List<?> list) {
+            Set<Integer> result = new HashSet<>();
+            for (Object item : list) {
+                if (item instanceof Number) {
+                    result.add(((Number) item).intValue());
+                }
+            }
+            return result;
+        }
+        return new HashSet<>();
+    }
+
     private Method findMethod(Class<?> clazz, String methodName) throws NoSuchMethodException {
         for (Method method : clazz.getMethods()) {
             if (method.getName().equals(methodName)) {
@@ -182,6 +208,24 @@ public class LevelGrader {
     @SuppressWarnings("unchecked")
     private Object convertExpected(String outputType, Object expected) {
         if (expected instanceof List<?> list) {
+            if (outputType.contains("Set<Set")) {
+                // Set<Set<T>> 처리 - List<List<T>> -> Set<Set<T>>
+                Set<Set<Object>> result = new HashSet<>();
+                for (Object item : list) {
+                    if (item instanceof List<?> innerList) {
+                        Set<Object> innerSet = new HashSet<>();
+                        for (Object elem : innerList) {
+                            if (elem instanceof Number) {
+                                innerSet.add(((Number) elem).intValue());
+                            } else {
+                                innerSet.add(elem);
+                            }
+                        }
+                        result.add(innerSet);
+                    }
+                }
+                return result;
+            }
             if (outputType.contains("Set")) {
                 return new HashSet<>(list);
             }
