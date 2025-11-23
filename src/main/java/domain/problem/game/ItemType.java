@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ItemType {
-    WEAPON("Weapon"), ARMOR("Armor"), POTION("Potion");
+    WEAPON("WEAPON"), ARMOR("ARMOR"), POTION("POTION");
 
     private final String name;
 

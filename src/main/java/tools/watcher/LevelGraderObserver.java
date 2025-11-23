@@ -2,6 +2,8 @@ package tools.watcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import context.GameContext;
+import domain.Profile;
+import repository.ProfileRepository;
 import tools.grader.level.LevelGrader;
 import tools.grader.level.LevelTestData;
 import ui.view.grading.LevelGradingView;
@@ -10,6 +12,7 @@ import ui.view.grading.LevelGradingView.ProblemGradeResult;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,21 +29,24 @@ public class LevelGraderObserver implements GraderObserver {
     private static final String TEST_DATA_PATTERN = "data/test-data/level%d/level%d.json";
     private static final String LEVEL_FILE_PATTERN = "Level%d.java";
     private static final long DEBOUNCE_DELAY_SECONDS = 2;
+    private static final List<Integer> FIBONACCI_7 = List.of(1, 1, 2, 3, 5, 8, 13);
 
     private final int level;
     private final LevelTestData testData;
     private final LevelGradingView view;
     private final GameContext gameContext;
+    private final ProfileRepository profileRepository;
     private final ScheduledExecutorService scheduler;
     private final String expectedFileName;
     private final AtomicBoolean isGrading = new AtomicBoolean(false);
     private ScheduledFuture<?> pendingGrade;
     private ClassLoader previousClassLoader = null;
 
-    public LevelGraderObserver(int level, LevelGradingView view, GameContext gameContext) {
+    public LevelGraderObserver(int level, LevelGradingView view, GameContext gameContext, ProfileRepository profileRepository) {
         this.level = level;
         this.view = view;
         this.gameContext = gameContext;
+        this.profileRepository = profileRepository;
         this.expectedFileName = String.format(LEVEL_FILE_PATTERN, level);
 
         try {
@@ -111,6 +117,11 @@ public class LevelGraderObserver implements GraderObserver {
             long passedCount = results.stream().filter(ProblemGradeResult::isComplete).count();
             if (passedCount == results.size()) {
                 gameContext.setLevelCompleted(level, true);
+            }
+
+            // Level 5는 항상 Secret Phase 해금 체크 (나중에 구현해도 해금 가능)
+            if (level == 5) {
+                checkSecretPhaseUnlock(solutionClass);
             }
 
         } catch (ClassNotFoundException e) {
@@ -197,4 +208,32 @@ public class LevelGraderObserver implements GraderObserver {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private void checkSecretPhaseUnlock(Class<?> solutionClass) {
+        try {
+            Method doNotTouchMethod = solutionClass.getMethod("doNotTouch");
+            Object result = doNotTouchMethod.invoke(null);
+
+            if (result instanceof List<?> list && list.equals(FIBONACCI_7)) {
+                Profile profile = profileRepository.load().orElse(null);
+                if (profile != null && !profile.isSecretUnlocked()) {
+                    profile.unlockSecret();
+                    profileRepository.save(profile);
+
+                    // 해금 연출
+                    System.out.println();
+                    System.out.println("██████████████████████████████████████");
+                    System.out.println("█                                    █");
+                    System.out.println("█   ░░░ HIDDEN SEQUENCE DETECTED ░░░ █");
+                    System.out.println("█                                    █");
+                    System.out.println("██████████████████████████████████████");
+                    System.out.println();
+                    System.out.println("🔓 Secret Phase 해금!");
+                    System.out.println();
+                }
+            }
+        } catch (Exception e) {
+            // doNotTouch 메서드 호출 실패 시 무시
+        }
+    }
 }

@@ -15,7 +15,10 @@ public class Level4 {
     /**
      * 4-1-1
      * <p>
-     * 주어진 문자열이 앞뒤가 같은 팰린드롬인지 판별
+     * 주어진 문자열이 앞뒤가 같은 팰린드롬인지 판별하세요.
+     * <p>
+     *     예를 들어 <code>comoc</code>은 팰린드롬이지만, <code>abc</code>는 팰린드롬이 아닙니다.
+     * </p>
      * 힌트: IntStream.range() + allMatch() 또는 StringBuilder.reverse()
      *
      * @param str 판별할 문자열

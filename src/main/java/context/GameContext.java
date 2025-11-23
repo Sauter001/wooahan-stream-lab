@@ -3,6 +3,7 @@ package context;
 import domain.GameState;
 import lombok.Getter;
 import lombok.Setter;
+import repository.ProfileRepository;
 import tools.watcher.FileWatcher;
 import tools.watcher.GraderObserver;
 import tools.watcher.LevelGraderObserver;
@@ -20,6 +21,7 @@ public class GameContext {
     private final FileWatcher fileWatcher;
     private final GradingView gradingView;
     private final LevelGradingView levelGradingView;
+    private final ProfileRepository profileRepository;
     private GraderObserver currentObserver;
     @Setter
     @Getter
@@ -33,6 +35,7 @@ public class GameContext {
         this.fileWatcher = new FileWatcher(Paths.get("src/main/java/solutions"));
         this.gradingView = new GradingConsoleView();
         this.levelGradingView = new LevelGradingConsoleView();
+        this.profileRepository = new ProfileRepository();
     }
 
     public void setLevelCompleted(int level, boolean completed) {
@@ -75,7 +78,7 @@ public class GameContext {
 
     public void setupLevelObserver() {
         clearCurrentObserver();
-        currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this);
+        currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this, profileRepository);
         fileWatcher.addObserver(currentObserver);
     }
 

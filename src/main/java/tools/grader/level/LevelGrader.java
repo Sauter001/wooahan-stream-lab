@@ -3,14 +3,13 @@ package tools.grader.level;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import domain.AnalysisContext;
+import domain.tools.SetToolbox;
+import domain.tools.SetToolboxImpl;
 import domain.validation.ValidationResult;
 import domain.validation.factory.ViolationFactory;
 import tools.validator.CompositeValidator;
 import tools.validator.MaxVariableDeclarationValidator;
 import tools.validator.Validator;
-
-import domain.tools.SetToolbox;
-import domain.tools.SetToolboxImpl;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -22,6 +21,7 @@ import java.util.*;
  * - 리플렉션으로 메소드 실행 후 expected와 비교
  */
 public class LevelGrader {
+    private static final double EPSILON = 1e-6;
     private final LevelTestData levelTestData;
     private final TestDataAssembler assembler;
     private final int level;
@@ -55,12 +55,24 @@ public class LevelGrader {
     private Validator createValidator(LevelTestData.Problem problem) {
         LevelTestData.ValidationConfig config = problem.getValidationOrDefault();
 
-        CompositeValidator validator = ViolationFactory.createStrictestValidator();
+        CompositeValidator validator = getValidatorByLevel();
 
         // maxVariables 설정에 따른 Validator 추가
         validator.add(new MaxVariableDeclarationValidator(config.getMaxVariables()));
 
         return validator;
+    }
+
+    private CompositeValidator getValidatorByLevel() {
+        if (this.level <= 3) {
+            return ViolationFactory.createStrictestValidator();
+        }
+
+        if (this.level <= 5) {
+            return ViolationFactory.createBlockLambdaAllowedValidator();
+        }
+
+        return ViolationFactory.createSecretPhaseValidator();
     }
 
     private ValidationResult validateMethod(File sourceFile, String methodName, Validator validator) {
@@ -245,8 +257,6 @@ public class LevelGrader {
         }
         return expected;
     }
-
-    private static final double EPSILON = 1e-6;
 
     private boolean compareResults(Object expected, Object actual) {
         if (expected == null && actual == null) return true;

@@ -1,0 +1,942 @@
+{
+  "level": 5,
+  "masterData": {
+    "guilds": [
+      {
+        "id": 1,
+        "name": "DragonSlayers",
+        "level": 10,
+        "region": "East"
+      },
+      {
+        "id": 2,
+        "name": "ShadowWalkers",
+        "level": 8,
+        "region": "West"
+      },
+      {
+        "id": 3,
+        "name": "IronFist",
+        "level": 12,
+        "region": "North"
+      },
+      {
+        "id": 4,
+        "name": "PhoenixRising",
+        "level": 15,
+        "region": "South"
+      },
+      {
+        "id": 5,
+        "name": "StormBringers",
+        "level": 6,
+        "region": "Central"
+      }
+    ],
+    "items": [
+      {
+        "id": 1,
+        "name": "철검",
+        "rarity": "COMMON",
+        "price": 100,
+        "type": "WEAPON",
+        "power": 10
+      },
+      {
+        "id": 2,
+        "name": "가죽갑옷",
+        "rarity": "COMMON",
+        "price": 150,
+        "type": "ARMOR",
+        "power": 8
+      },
+      {
+        "id": 3,
+        "name": "화염검",
+        "rarity": "RARE",
+        "price": 500,
+        "type": "WEAPON",
+        "power": 25
+      },
+      {
+        "id": 4,
+        "name": "미스릴갑옷",
+        "rarity": "EPIC",
+        "price": 2000,
+        "type": "ARMOR",
+        "power": 40
+      },
+      {
+        "id": 5,
+        "name": "체력포션",
+        "rarity": "COMMON",
+        "price": 50,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 6,
+        "name": "전설의검",
+        "rarity": "LEGENDARY",
+        "price": 10000,
+        "type": "WEAPON",
+        "power": 100
+      },
+      {
+        "id": 7,
+        "name": "단검",
+        "rarity": "COMMON",
+        "price": 80,
+        "type": "WEAPON",
+        "power": 8
+      },
+      {
+        "id": 8,
+        "name": "천갑옷",
+        "rarity": "COMMON",
+        "price": 120,
+        "type": "ARMOR",
+        "power": 5
+      },
+      {
+        "id": 9,
+        "name": "얼음창",
+        "rarity": "RARE",
+        "price": 550,
+        "type": "WEAPON",
+        "power": 28
+      },
+      {
+        "id": 10,
+        "name": "강철갑옷",
+        "rarity": "RARE",
+        "price": 800,
+        "type": "ARMOR",
+        "power": 20
+      },
+      {
+        "id": 11,
+        "name": "마나포션",
+        "rarity": "COMMON",
+        "price": 60,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 12,
+        "name": "번개검",
+        "rarity": "EPIC",
+        "price": 2500,
+        "type": "WEAPON",
+        "power": 45
+      },
+      {
+        "id": 13,
+        "name": "용비늘갑옷",
+        "rarity": "EPIC",
+        "price": 3000,
+        "type": "ARMOR",
+        "power": 50
+      },
+      {
+        "id": 14,
+        "name": "독단검",
+        "rarity": "RARE",
+        "price": 450,
+        "type": "WEAPON",
+        "power": 22
+      },
+      {
+        "id": 15,
+        "name": "회복포션",
+        "rarity": "RARE",
+        "price": 200,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 16,
+        "name": "어둠의검",
+        "rarity": "LEGENDARY",
+        "price": 12000,
+        "type": "WEAPON",
+        "power": 110
+      },
+      {
+        "id": 17,
+        "name": "천사의갑옷",
+        "rarity": "LEGENDARY",
+        "price": 15000,
+        "type": "ARMOR",
+        "power": 90
+      },
+      {
+        "id": 18,
+        "name": "뼈단검",
+        "rarity": "COMMON",
+        "price": 90,
+        "type": "WEAPON",
+        "power": 9
+      },
+      {
+        "id": 19,
+        "name": "사슬갑옷",
+        "rarity": "RARE",
+        "price": 700,
+        "type": "ARMOR",
+        "power": 18
+      },
+      {
+        "id": 20,
+        "name": "대형포션",
+        "rarity": "EPIC",
+        "price": 500,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 21,
+        "name": "양손검",
+        "rarity": "RARE",
+        "price": 600,
+        "type": "WEAPON",
+        "power": 30
+      },
+      {
+        "id": 22,
+        "name": "마법사로브",
+        "rarity": "RARE",
+        "price": 650,
+        "type": "ARMOR",
+        "power": 15
+      },
+      {
+        "id": 23,
+        "name": "불사의검",
+        "rarity": "LEGENDARY",
+        "price": 20000,
+        "type": "WEAPON",
+        "power": 120
+      },
+      {
+        "id": 24,
+        "name": "판금갑옷",
+        "rarity": "EPIC",
+        "price": 2200,
+        "type": "ARMOR",
+        "power": 45
+      },
+      {
+        "id": 25,
+        "name": "해독제",
+        "rarity": "COMMON",
+        "price": 30,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 26,
+        "name": "활",
+        "rarity": "COMMON",
+        "price": 110,
+        "type": "WEAPON",
+        "power": 12
+      },
+      {
+        "id": 27,
+        "name": "가죽부츠",
+        "rarity": "COMMON",
+        "price": 70,
+        "type": "ARMOR",
+        "power": 4
+      },
+      {
+        "id": 28,
+        "name": "정밀활",
+        "rarity": "RARE",
+        "price": 480,
+        "type": "WEAPON",
+        "power": 24
+      },
+      {
+        "id": 29,
+        "name": "민첩부츠",
+        "rarity": "RARE",
+        "price": 550,
+        "type": "ARMOR",
+        "power": 12
+      },
+      {
+        "id": 30,
+        "name": "속도포션",
+        "rarity": "RARE",
+        "price": 180,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 31,
+        "name": "저격활",
+        "rarity": "EPIC",
+        "price": 1800,
+        "type": "WEAPON",
+        "power": 38
+      },
+      {
+        "id": 32,
+        "name": "그림자망토",
+        "rarity": "EPIC",
+        "price": 2100,
+        "type": "ARMOR",
+        "power": 35
+      },
+      {
+        "id": 33,
+        "name": "석궁",
+        "rarity": "RARE",
+        "price": 520,
+        "type": "WEAPON",
+        "power": 26
+      },
+      {
+        "id": 34,
+        "name": "마법방패",
+        "rarity": "RARE",
+        "price": 600,
+        "type": "ARMOR",
+        "power": 22
+      },
+      {
+        "id": 35,
+        "name": "힘의포션",
+        "rarity": "EPIC",
+        "price": 400,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 36,
+        "name": "지팡이",
+        "rarity": "COMMON",
+        "price": 95,
+        "type": "WEAPON",
+        "power": 11
+      },
+      {
+        "id": 37,
+        "name": "견습생로브",
+        "rarity": "COMMON",
+        "price": 100,
+        "type": "ARMOR",
+        "power": 6
+      },
+      {
+        "id": 38,
+        "name": "화염지팡이",
+        "rarity": "RARE",
+        "price": 580,
+        "type": "WEAPON",
+        "power": 27
+      },
+      {
+        "id": 39,
+        "name": "현자의로브",
+        "rarity": "EPIC",
+        "price": 1900,
+        "type": "ARMOR",
+        "power": 38
+      },
+      {
+        "id": 40,
+        "name": "지능포션",
+        "rarity": "RARE",
+        "price": 220,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 41,
+        "name": "대마법사지팡이",
+        "rarity": "LEGENDARY",
+        "price": 18000,
+        "type": "WEAPON",
+        "power": 105
+      },
+      {
+        "id": 42,
+        "name": "아크메이지로브",
+        "rarity": "LEGENDARY",
+        "price": 16000,
+        "type": "ARMOR",
+        "power": 85
+      },
+      {
+        "id": 43,
+        "name": "도끼",
+        "rarity": "COMMON",
+        "price": 130,
+        "type": "WEAPON",
+        "power": 14
+      },
+      {
+        "id": 44,
+        "name": "바이킹헬멧",
+        "rarity": "RARE",
+        "price": 420,
+        "type": "ARMOR",
+        "power": 16
+      },
+      {
+        "id": 45,
+        "name": "전투도끼",
+        "rarity": "RARE",
+        "price": 540,
+        "type": "WEAPON",
+        "power": 29
+      },
+      {
+        "id": 46,
+        "name": "철벽방패",
+        "rarity": "EPIC",
+        "price": 1600,
+        "type": "ARMOR",
+        "power": 42
+      },
+      {
+        "id": 47,
+        "name": "처형자도끼",
+        "rarity": "EPIC",
+        "price": 2400,
+        "type": "WEAPON",
+        "power": 48
+      },
+      {
+        "id": 48,
+        "name": "불멸의포션",
+        "rarity": "LEGENDARY",
+        "price": 5000,
+        "type": "POTION",
+        "power": 0
+      },
+      {
+        "id": 49,
+        "name": "세계수지팡이",
+        "rarity": "EPIC",
+        "price": 2800,
+        "type": "WEAPON",
+        "power": 52
+      },
+      {
+        "id": 50,
+        "name": "신의갑옷",
+        "rarity": "LEGENDARY",
+        "price": 25000,
+        "type": "ARMOR",
+        "power": 95
+      }
+    ],
+    "characters": [
+      {
+        "id": 1,
+        "name": "전사킴",
+        "level": 50,
+        "characterClass": "WARRIOR",
+        "guildId": 1,
+        "inventoryItemIds": [
+          1,
+          2,
+          5
+        ],
+        "gold": 1000,
+        "active": true
+      },
+      {
+        "id": 2,
+        "name": "마법사이",
+        "level": 45,
+        "characterClass": "MAGE",
+        "guildId": 1,
+        "inventoryItemIds": [
+          36,
+          37,
+          11
+        ],
+        "gold": 2000,
+        "active": true
+      },
+      {
+        "id": 3,
+        "name": "궁수박",
+        "level": 30,
+        "characterClass": "ARCHER",
+        "guildId": 2,
+        "inventoryItemIds": [
+          26,
+          27,
+          5
+        ],
+        "gold": 500,
+        "active": false
+      },
+      {
+        "id": 4,
+        "name": "암살자최",
+        "level": 55,
+        "characterClass": "ASSASSIN",
+        "guildId": null,
+        "inventoryItemIds": [
+          14,
+          32,
+          30
+        ],
+        "gold": 5000,
+        "active": true
+      },
+      {
+        "id": 5,
+        "name": "힐러정",
+        "level": 40,
+        "characterClass": "HEALER",
+        "guildId": 3,
+        "inventoryItemIds": [
+          36,
+          22,
+          15
+        ],
+        "gold": 800,
+        "active": true
+      },
+      {
+        "id": 6,
+        "name": "초보전사",
+        "level": 5,
+        "characterClass": "WARRIOR",
+        "guildId": null,
+        "inventoryItemIds": [
+          1
+        ],
+        "gold": 100,
+        "active": true
+      },
+      {
+        "id": 7,
+        "name": "베테랑마법사",
+        "level": 60,
+        "characterClass": "MAGE",
+        "guildId": 3,
+        "inventoryItemIds": [
+          41,
+          42,
+          20
+        ],
+        "gold": 10000,
+        "active": true
+      },
+      {
+        "id": 8,
+        "name": "숙련궁수",
+        "level": 42,
+        "characterClass": "ARCHER",
+        "guildId": 4,
+        "inventoryItemIds": [
+          28,
+          29,
+          30
+        ],
+        "gold": 3500,
+        "active": true
+      },
+      {
+        "id": 9,
+        "name": "그림자암살자",
+        "level": 58,
+        "characterClass": "ASSASSIN",
+        "guildId": 4,
+        "inventoryItemIds": [
+          16,
+          32,
+          35
+        ],
+        "gold": 8000,
+        "active": true
+      },
+      {
+        "id": 10,
+        "name": "성기사",
+        "level": 52,
+        "characterClass": "WARRIOR",
+        "guildId": 1,
+        "inventoryItemIds": [
+          3,
+          10,
+          15
+        ],
+        "gold": 4500,
+        "active": true
+      },
+      {
+        "id": 11,
+        "name": "원소술사",
+        "level": 48,
+        "characterClass": "MAGE",
+        "guildId": 2,
+        "inventoryItemIds": [
+          38,
+          39,
+          40
+        ],
+        "gold": 6000,
+        "active": false
+      },
+      {
+        "id": 12,
+        "name": "명사수",
+        "level": 35,
+        "characterClass": "ARCHER",
+        "guildId": 5,
+        "inventoryItemIds": [
+          31,
+          29,
+          5
+        ],
+        "gold": 2200,
+        "active": true
+      },
+      {
+        "id": 13,
+        "name": "독수리암살자",
+        "level": 38,
+        "characterClass": "ASSASSIN",
+        "guildId": 2,
+        "inventoryItemIds": [
+          7,
+          8,
+          25
+        ],
+        "gold": 1800,
+        "active": true
+      },
+      {
+        "id": 14,
+        "name": "광전사",
+        "level": 62,
+        "characterClass": "WARRIOR",
+        "guildId": 4,
+        "inventoryItemIds": [
+          47,
+          24,
+          35
+        ],
+        "gold": 12000,
+        "active": true
+      },
+      {
+        "id": 15,
+        "name": "대마법사",
+        "level": 65,
+        "characterClass": "MAGE",
+        "guildId": 4,
+        "inventoryItemIds": [
+          23,
+          17,
+          48
+        ],
+        "gold": 20000,
+        "active": true
+      },
+      {
+        "id": 16,
+        "name": "저격수",
+        "level": 44,
+        "characterClass": "ARCHER",
+        "guildId": 3,
+        "inventoryItemIds": [
+          33,
+          34,
+          30
+        ],
+        "gold": 3000,
+        "active": true
+      },
+      {
+        "id": 17,
+        "name": "야행자",
+        "level": 33,
+        "characterClass": "ASSASSIN",
+        "guildId": null,
+        "inventoryItemIds": [
+          18,
+          19,
+          11
+        ],
+        "gold": 1500,
+        "active": false
+      },
+      {
+        "id": 18,
+        "name": "수호자",
+        "level": 55,
+        "characterClass": "WARRIOR",
+        "guildId": 1,
+        "inventoryItemIds": [
+          12,
+          13,
+          20
+        ],
+        "gold": 7000,
+        "active": true
+      },
+      {
+        "id": 19,
+        "name": "현자",
+        "level": 50,
+        "characterClass": "MAGE",
+        "guildId": 5,
+        "inventoryItemIds": [
+          49,
+          22,
+          40
+        ],
+        "gold": 5500,
+        "active": true
+      },
+      {
+        "id": 20,
+        "name": "명궁",
+        "level": 47,
+        "characterClass": "ARCHER",
+        "guildId": 1,
+        "inventoryItemIds": [
+          28,
+          10,
+          15
+        ],
+        "gold": 4000,
+        "active": true
+      },
+      {
+        "id": 21,
+        "name": "칼날암살자",
+        "level": 41,
+        "characterClass": "ASSASSIN",
+        "guildId": 5,
+        "inventoryItemIds": [
+          9,
+          19,
+          30
+        ],
+        "gold": 2800,
+        "active": true
+      },
+      {
+        "id": 22,
+        "name": "방패병",
+        "level": 28,
+        "characterClass": "WARRIOR",
+        "guildId": 2,
+        "inventoryItemIds": [
+          43,
+          44,
+          5
+        ],
+        "gold": 900,
+        "active": true
+      },
+      {
+        "id": 23,
+        "name": "화염술사",
+        "level": 36,
+        "characterClass": "MAGE",
+        "guildId": 3,
+        "inventoryItemIds": [
+          38,
+          37,
+          11
+        ],
+        "gold": 2100,
+        "active": false
+      },
+      {
+        "id": 24,
+        "name": "숲의궁수",
+        "level": 25,
+        "characterClass": "ARCHER",
+        "guildId": null,
+        "inventoryItemIds": [
+          26,
+          8,
+          5
+        ],
+        "gold": 600,
+        "active": true
+      },
+      {
+        "id": 25,
+        "name": "은신술사",
+        "level": 39,
+        "characterClass": "ASSASSIN",
+        "guildId": 4,
+        "inventoryItemIds": [
+          21,
+          32,
+          25
+        ],
+        "gold": 2500,
+        "active": true
+      },
+      {
+        "id": 26,
+        "name": "철권사",
+        "level": 57,
+        "characterClass": "WARRIOR",
+        "guildId": 3,
+        "inventoryItemIds": [
+          45,
+          46,
+          35
+        ],
+        "gold": 9000,
+        "active": true
+      },
+      {
+        "id": 27,
+        "name": "빙결술사",
+        "level": 43,
+        "characterClass": "MAGE",
+        "guildId": 2,
+        "inventoryItemIds": [
+          9,
+          22,
+          15
+        ],
+        "gold": 3200,
+        "active": true
+      },
+      {
+        "id": 28,
+        "name": "사냥꾼",
+        "level": 31,
+        "characterClass": "ARCHER",
+        "guildId": 5,
+        "inventoryItemIds": [
+          33,
+          27,
+          11
+        ],
+        "gold": 1200,
+        "active": true
+      },
+      {
+        "id": 29,
+        "name": "밤의추적자",
+        "level": 46,
+        "characterClass": "ASSASSIN",
+        "guildId": 1,
+        "inventoryItemIds": [
+          14,
+          4,
+          30
+        ],
+        "gold": 4200,
+        "active": true
+      },
+      {
+        "id": 30,
+        "name": "불멸전사",
+        "level": 70,
+        "characterClass": "WARRIOR",
+        "guildId": 4,
+        "inventoryItemIds": [
+          6,
+          50,
+          48
+        ],
+        "gold": 50000,
+        "active": true
+      }
+    ]
+  },
+  "problems": [
+    {
+      "id": "5-1-1",
+      "name": "희귀 아이템 수집가",
+      "description": "Rare, Epic, Legendary 등급 아이템을 3개 이상 보유한 캐릭터를 찾아, 소속 길드의 레벨 내림차순으로 정렬하여 이름 목록을 반환하세요. 길드가 없는 캐릭터는 제외합니다. 같은 길드 레벨 내에서는 캐릭터 ID 오름차순으로 정렬합니다.",
+      "methodName": "getRareItemCollectors",
+      "inputType": "characters",
+      "outputType": "List<String>",
+      "validation": { "maxVariables": 1 },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+          "expected": ["숙련궁수", "그림자암살자", "광전사", "대마법사", "불멸전사", "베테랑마법사", "저격수", "철권사", "성기사", "수호자", "명궁", "밤의추적자", "원소술사", "빙결술사", "현자", "칼날암살자"]
+        }
+      ]
+    },
+    {
+      "id": "5-1-2",
+      "name": "3개씩 묶기",
+      "description": "정수 리스트를 3개씩 묶어 List<List<Integer>>로 반환하세요. 마지막 그룹은 3개 미만일 수 있습니다. Custom Collector를 구현하세요.",
+      "methodName": "groupByThree",
+      "inputType": "integerList",
+      "outputType": "List<List<Integer>>",
+      "validation": { "maxVariables": 1 },
+      "testCases": [
+        { "inputRaw": [1, 2, 3, 4, 5, 6, 7], "expected": [[1, 2, 3], [4, 5, 6], [7]] },
+        { "inputRaw": [1, 2, 3, 4, 5, 6], "expected": [[1, 2, 3], [4, 5, 6]] },
+        { "inputRaw": [1, 2], "expected": [[1, 2]] },
+        { "inputRaw": [], "expected": [] }
+      ]
+    },
+    {
+      "id": "5-2-1",
+      "name": "타입별 최고 power 아이템 TOP 5",
+      "description": "모든 캐릭터의 인벤토리에서 아이템을 추출하여 타입별로 그룹화한 뒤, 각 타입에서 power가 가장 높은 아이템을 찾고, 그 power 기준 상위 5개 타입의 아이템을 Map<String, String>으로 반환하세요. Power가 같으면 Rarity가 높은 아이템을 선택합니다. (LEGENDARY > EPIC > RARE > COMMON) (key: 타입, value: 아이템 이름)",
+      "methodName": "getTop5PowerItemsByType",
+      "inputType": "characters",
+      "outputType": "Map<String, String>",
+      "validation": { "maxVariables": 1 },
+      "testCases": [
+        {
+          "inputIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+          "expected": {
+            "WEAPON": "불사의검",
+            "ARMOR": "신의갑옷",
+            "POTION": "불멸의포션"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5-2-2",
+      "name": "연속 부분합 최댓값",
+      "description": "정수 리스트에서 연속된 부분합의 최댓값을 구하세요. (Kadane's Algorithm)",
+      "methodName": "getMaximumSubarraySum",
+      "inputType": "integerList",
+      "outputType": "int",
+      "validation": { "maxVariables": 2 },
+      "testCases": [
+        { "inputRaw": [-2, 1, -3, 4, -1, 2, 1, -5, 4], "expected": 6 },
+        { "inputRaw": [1, 2, 3, 4, 5], "expected": 15 },
+        { "inputRaw": [-1, -2, -3], "expected": -1 },
+        { "inputRaw": [5, -9, 6, -2, 3], "expected": 7 },
+        { "inputRaw": [-2, -1], "expected": -1 }
+      ]
+    },
+    {
+      "id": "5-3-1",
+      "name": "문자열 런렝스 압축",
+      "description": "문자열에서 연속된 문자를 '문자+개수' 형태로 압축하세요. 예: \"aaabbbcc\" → \"a3b3c2\". [방법1] Collector.of()로 상태 관리 [방법2] reduce()와 Pair<결과, Pair<현재문자, 카운트>> 활용 (종료 문자 트릭 권장)",
+      "methodName": "compress",
+      "inputType": "string",
+      "outputType": "String",
+      "validation": { "maxVariables": 3 },
+      "testCases": [
+        { "inputRaw": "aaabbbcc", "expected": "a3b3c2" },
+        { "inputRaw": "aabbcc", "expected": "a2b2c2" },
+        { "inputRaw": "abc", "expected": "a1b1c1" },
+        { "inputRaw": "aaaa", "expected": "a4" },
+        { "inputRaw": "a", "expected": "a1" }
+      ]
+    }
+  ]
+}
