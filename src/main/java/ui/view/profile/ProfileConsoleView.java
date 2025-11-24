@@ -22,6 +22,11 @@ public class ProfileConsoleView implements ProfileView {
     }
 
     @Override
+    public void showNameError(String message) {
+        System.out.println("[ERROR] " + message);
+    }
+
+    @Override
     public void showWelcomeBack(String userName) {
         System.out.printf("""
 

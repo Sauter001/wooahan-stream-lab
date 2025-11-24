@@ -48,9 +48,18 @@ public class ProfileHandler implements StateHandler {
 
     private String promptValidUserName() {
         String userName;
-        do {
+        while (true) {
             userName = view.promptUserName();
-        } while (userName.isBlank());
+            if (userName.isBlank()) {
+                view.showNameError("이름을 입력해주세요.");
+                continue;
+            }
+            if (userName.length() > 20) {
+                view.showNameError("이름은 20자 이하로 입력해주세요.");
+                continue;
+            }
+            break;
+        }
         return userName;
     }
 }
