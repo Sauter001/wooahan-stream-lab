@@ -6,18 +6,6 @@ import tools.grader.level.LevelGrader;
 import java.util.List;
 
 public class LevelGradingConsoleView implements LevelGradingView {
-    private static final int SECRET_LEVEL = 6;
-
-    @Override
-    public void displayWatcherStarted(int level) {
-        String filePath;
-        if (level == SECRET_LEVEL) {
-            filePath = "src/main/java/solutions/secret/LevelSecret.java";
-        } else {
-            filePath = String.format("src/main/java/solutions/level%d/Level%d.java", level, level);
-        }
-        System.out.printf("%n📂 %s%n", filePath);
-    }
 
     @Override
     public void displayFileChangeDetected() {
