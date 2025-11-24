@@ -12,7 +12,7 @@ Java를 배우는 많은 사람들이 Java의 lambda와 stream이 강력함을 �
 
 Bomb Lab의 단계별 문제 해금과 비밀 단계, 그리고 특정 연산자만 써야 했던 Data Lab처럼, Stream Lab에서는 **오직 Stream API만 허용**합니다. 별 생각 없이 썼던 루프와 컬렉션 선언 없이 문제를 풀어야 합니다. 이런 극단적인 제약에서 진짜 문제 해결력을 테스트받아 보세요.
 
-## 🔒 가지 철칙
+## 🔒 4가지 철칙
 ```java
 // ❌ 1. for, while, do-while 금지
 for (int i = 0; i < list.size(); i++) { }
@@ -23,7 +23,7 @@ public int sum(int n) { return n + sum(n-1); }
 // ❌ 3. 헬퍼 메소드 추가 선언 금지
 private void helper() { }
 
-// ❌ 4. 블록 람다 금지
+// ❌ 4. 블록 람다 금지 (Level 4부터 허용)
 x -> { 
     int powered = x * x; 
     return powered; 
@@ -70,6 +70,13 @@ private void doSomething() {
     
 }
 ```
+
+## 📃 개발 문서
+[/docs](https://github.com/Sauter001/wooahan-stream-lab/tree/main/docs) 에서 확인 가능합니다. 
+* 기획 과정
+* 버그 해결 과정 
+
+등의 개발 과정은 모두 여기에 포함되어 있습니다. 
 
 ## 🎓 학습 트리
 
