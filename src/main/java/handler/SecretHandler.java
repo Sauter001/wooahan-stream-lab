@@ -40,7 +40,7 @@ public class SecretHandler implements StateHandler {
         }
 
         String secretKey = "secret";
-        boolean showDialogue = !profile.isLevelDialogueShown(secretKey);
+        boolean showDialogue = profile.isLevelDialogueShown(secretKey);
 
         view.showSecretIntro(showDialogue);
 

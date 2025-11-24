@@ -45,7 +45,7 @@ public class LevelHandler implements StateHandler {
         LevelInfo levelInfo = LevelInfo.ofLevel(currentLevel);
         String levelKey = "level" + currentLevel;
 
-        boolean showDialogue = !profile.isLevelDialogueShown(levelKey);
+        boolean showDialogue = profile.isLevelDialogueShown(levelKey);
 
         view.showLevelIntro(levelInfo, showDialogue);
 

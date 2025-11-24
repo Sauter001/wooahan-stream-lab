@@ -42,7 +42,7 @@ public class Profile {
     }
 
     public boolean isLevelDialogueShown(String levelId) {
-        return levelDialogueShown.getOrDefault(levelId, false);
+        return levelDialogueShown.getOrDefault(levelId, true);
     }
 
     public void passLevel(int level) {

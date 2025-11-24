@@ -54,11 +54,11 @@ public class LevelConsoleView implements LevelView {
     @Override
     public void showLearningObjectives(LevelInfo levelInfo) {
         System.out.println("┌─────────────────────────────────────────────────┐");
-        System.out.println("│              학습 목표                          │");
+        System.out.println("               학습 목표                           ");
         System.out.println("├─────────────────────────────────────────────────┤");
 
         for (String objective : levelInfo.learningObjectives()) {
-            System.out.printf("│  • %-43s │%n", truncate(objective, 43));
+            System.out.printf("    • %s%n", objective);
         }
 
         System.out.println("└─────────────────────────────────────────────────┘");
