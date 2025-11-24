@@ -1,11 +1,11 @@
 # GoldbachToolbox - 골드바흐 추측 검증 도구 모음
 
-Secret Phase 문제에서 골드바흐 추측 검증을 위해 제공되는 도구입니다.
-내부적으로 에라토스테네스의 체(Sieve of Eratosthenes)가 미리 계산되어 O(1) 소수 판별이 가능합니다.
+- Secret Phase 문제에서 골드바흐 추측 검증을 위해 제공되는 도구. 
+- 내부적으로 에라토스테네스의 체(Sieve of Eratosthenes)가 미리 계산되어 O(1) 소수 판별이 가능하다.
 
 ## 사용 방법
 
-**중요**: `GoldbachToolbox`는 직접 import하여 사용할 수 없습니다. 메서드 파라미터로 전달받아 사용해야 합니다.
+**중요**: `GoldbachToolbox`는 직접 import하여 사용할 수 없다. 메서드 파라미터로 전달받아 사용해야 한다.
 
 ```java
 // ❌ 잘못된 사용 - import 불가
@@ -38,7 +38,7 @@ public static long sumTop100GoldbachPrimes(int maxN, GoldbachToolbox tools) {
 
 ### isPrime(int n)
 
-주어진 수가 소수인지 O(1)에 판별합니다.
+주어진 수가 소수인지 O(1)에 판별한다.
 
 ```java
 tools.isPrime(2)   // → true
@@ -47,13 +47,13 @@ tools.isPrime(17)  // → true
 tools.isPrime(1)   // → false
 ```
 
-**내부 구현**: 생성 시 에라토스테네스의 체로 소수 여부를 미리 계산해둡니다.
+**내부 구현**: 생성 시 에라토스테네스의 체로 소수 여부를 미리 계산해 둔다.
 
 ---
 
 ### primes(int maxN)
 
-2부터 maxN까지의 모든 소수를 IntStream으로 반환합니다.
+2부터 maxN까지의 모든 소수를 IntStream으로 반환한다.
 
 ```java
 tools.primes(20)
@@ -66,7 +66,7 @@ tools.primes(20)
 
 ### getMaxN()
 
-이 Toolbox가 지원하는 최대 범위를 반환합니다.
+이 Toolbox가 지원하는 최대 범위를 반환한다.
 
 ```java
 tools.getMaxN()  // → 100000 (문제에 따라 다름)
@@ -93,7 +93,7 @@ tools.getMaxN()  // → 100000 (문제에 따라 다름)
 
 ### 골드바흐 쌍 찾기
 
-짝수 n에 대해 골드바흐 쌍(p, n-p)을 찾습니다:
+짝수 n에 대해 골드바흐 쌍(p, n-p)을 찾는다:
 
 ```java
 // n=10의 골드바흐 쌍에서 작은 소수들
@@ -138,7 +138,7 @@ public static long sumTop100GoldbachPrimes(int maxN, GoldbachToolbox tools) {
 | 50,000 | ~1.5s | ~250ms |
 | 100,000 | ~3s+ | ~900ms |
 
-문제의 시간 제한(1.5초)은 `parallel()` 사용을 강제합니다.
+문제의 시간 제한(1.5초)은 `parallel()` 사용을 강제한다.
 
 ### O(1) 소수 판별의 중요성
 
@@ -155,7 +155,7 @@ public static long sumTop100GoldbachPrimes(int maxN, GoldbachToolbox tools) {
 
 ## 주의사항
 
-1. **import 금지**: `domain.tools` 패키지 import 시 검증 실패합니다.
-2. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `GoldbachToolbox` 파라미터만 사용하세요.
-3. **범위 제한**: `getMaxN()`을 초과하는 수에 대한 판별은 오류 발생합니다.
-4. **병렬 처리**: S-3 문제는 `parallel()` 없이는 시간 초과됩니다.
+1. **import 금지**: `domain.tools` 패키지 import 시 검증 실패
+2. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `GoldbachToolbox` 파라미터만 사용할 것.
+3. **범위 제한**: `getMaxN()`을 초과하는 수에 대한 판별은 오류 발생함.
+4. **병렬 처리**: S-3 문제는 `parallel()` 없이는 시간 초과.

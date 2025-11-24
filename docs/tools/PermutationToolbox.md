@@ -1,10 +1,10 @@
 # PermutationToolbox - 순열 생성 도구 모음
 
-Secret Phase 문제에서 순열(Permutation) 생성을 위해 제공되는 도구입니다.
+- Secret Phase 문제에서 순열(Permutation) 생성을 위해 제공되는 도구.
 
 ## 사용 방법
 
-**중요**: `PermutationToolbox`는 직접 import하여 사용할 수 없습니다. 메서드 파라미터로 전달받아 사용해야 합니다.
+**중요**: `PermutationToolbox`는 직접 import하여 사용할 수 없다. 메서드 파라미터로 전달받아 사용해야 한다.
 
 ```java
 // ❌ 잘못된 사용 - import 불가
@@ -38,7 +38,7 @@ public static List<List<Integer>> permutations(List<Integer> elements, Permutati
 
 ### emptySeed()
 
-순열 생성의 시작점입니다. 빈 리스트 하나를 담은 List를 반환합니다.
+순열 생성의 시작점이다. 빈 리스트 하나를 담은 List를 반환한다.
 
 ```java
 tools.emptySeed()  // → [[]]
@@ -50,7 +50,7 @@ tools.emptySeed()  // → [[]]
 
 ### insertAll(list, element)
 
-핵심 연산입니다. 주어진 리스트의 **모든 위치**에 원소를 삽입한 결과를 Stream으로 반환합니다.
+핵심 연산이다. 주어진 리스트의 **모든 위치**에 원소를 삽입한 결과를 Stream으로 반환한다.
 
 ```java
 tools.insertAll(List.of(2, 3), 1)
@@ -67,7 +67,7 @@ tools.insertAll(List.of(2, 3), 1)
 
 ### merge(a, b)
 
-두 `List<List<T>>`를 하나로 합칩니다.
+두 `List<List<T>>`를 하나로 합친다.
 
 ```java
 tools.merge(
@@ -136,7 +136,7 @@ public static List<List<Integer>> permutations(List<Integer> elements, Permutati
 
 ## 주의사항
 
-1. **불변성**: 모든 연산은 원본을 변경하지 않고 새 List를 반환합니다.
-2. **import 금지**: `domain.tools` 패키지 import 시 검증 실패합니다.
-3. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `PermutationToolbox` 파라미터만 사용하세요.
-4. **정렬 순서**: 기본 순열 생성은 순서를 보장하지 않습니다. 사전순이 필요하면 별도 정렬이 필요합니다.
+1. **불변성**: 모든 연산은 원본을 변경하지 않고 새 List를 반환한다.
+2. **import 금지**: `domain.tools` 패키지 import 시 검증 실패함.
+3. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `PermutationToolbox` 파라미터만 사용할 것.
+4. **정렬 순서**: 기본 순열 생성은 순서를 보장하지 않는다. 사전순이 필요하면 별도 정렬이 필요하다.

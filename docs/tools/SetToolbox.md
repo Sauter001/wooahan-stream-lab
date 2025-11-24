@@ -1,10 +1,10 @@
 # SetToolbox - 집합 연산 도구 모음
 
-Level4 이상 문제에서 복잡한 집합 연산(멱집합 등)을 위해 제공되는 도구입니다.
+- Level4 이상 문제에서 복잡한 집합 연산(멱집합 등)을 위해 제공되는 도구
 
 ## 사용 방법
 
-**중요**: `SetToolbox`는 직접 import하여 사용할 수 없습니다. 메서드 파라미터로 전달받아 사용해야 합니다.
+**중요**: `SetToolbox`는 직접 import하여 사용할 수 없다. 메서드 파라미터로 전달받아 사용해야 한다.
 
 ```java
 // ❌ 잘못된 사용 - import 불가
@@ -90,6 +90,6 @@ public static <T> Set<Set<T>> combinations(Set<T> set, int k, SetToolbox<T> tool
 
 ## 주의사항
 
-1. **불변성**: 모든 연산은 원본을 변경하지 않고 새 Set을 반환합니다.
-2. **import 금지**: `domain.tools` 패키지 import 시 검증 실패합니다.
-3. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `SetToolbox` 파라미터만 사용하세요.
+1. **불변성**: 모든 연산은 원본을 변경하지 않고 새 Set을 반환한다.
+2. **import 금지**: `domain.tools` 패키지 import 시 검증 실패.
+3. **파라미터 전용**: 문제의 메서드 시그니처에 포함된 `SetToolbox` 파라미터만 사용할 것.
