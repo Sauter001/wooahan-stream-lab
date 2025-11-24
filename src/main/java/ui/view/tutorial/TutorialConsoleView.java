@@ -80,7 +80,7 @@ public class TutorialConsoleView implements TutorialView {
                 입력: [1, 2, 3, 4, 5, 6]
                 출력: [2, 4, 6]
                 """);
-        System.out.printf("%s 파일을 수정하고 저장하세요.\n", DirectoryConstants.TUTORIAL_PATH);
+        System.out.printf("%s 파일을 수정하고 저장(Ctrl + S)하세요.\n", DirectoryConstants.TUTORIAL_PATH);
     }
 
     @Override
