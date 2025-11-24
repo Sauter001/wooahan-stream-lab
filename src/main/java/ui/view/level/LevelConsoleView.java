@@ -24,7 +24,7 @@ public class LevelConsoleView implements LevelView {
     public void showLevelIntro(LevelInfo levelInfo, boolean showDialogue) {
         printLevelHeader(levelInfo);
 
-        if (showDialogue) {
+        if (!showDialogue) {
             printDialogue(levelInfo.dialogue());
         }
 
