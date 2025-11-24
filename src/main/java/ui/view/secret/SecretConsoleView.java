@@ -48,13 +48,13 @@ public class SecretConsoleView implements SecretView {
     }
 
     private void showLearningObjectives() {
-        System.out.println("┌─────────────────────────────────────────────────┐");
-        System.out.println("│              SECRET PHASE 목표                  │");
-        System.out.println("├─────────────────────────────────────────────────┤");
-        System.out.println("│  • reduce()를 활용한 순열 생성                  │");
-        System.out.println("│  • Stream.iterate()와 무한 스트림               │");
-        System.out.println("│  • parallelStream()과 성능 최적화               │");
-        System.out.println("└─────────────────────────────────────────────────┘");
+        System.out.println("──────────────────────────────────────────────────");
+        System.out.println("              SECRET PHASE 목표                   ");
+        System.out.println("──────────────────────────────────────────────────");
+        System.out.println("  • reduce()를 활용한 순열 생성");
+        System.out.println("  • Stream.iterate()와 무한 스트림");
+        System.out.println("  • parallelStream()과 성능 최적화");
+        System.out.println("──────────────────────────────────────────────────");
         System.out.println();
     }
 
