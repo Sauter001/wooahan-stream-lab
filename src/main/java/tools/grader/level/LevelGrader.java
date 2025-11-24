@@ -3,6 +3,10 @@ package tools.grader.level;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import domain.AnalysisContext;
+import domain.tools.GoldbachToolbox;
+import domain.tools.GoldbachToolboxImpl;
+import domain.tools.PermutationToolbox;
+import domain.tools.PermutationToolboxImpl;
 import domain.tools.SetToolbox;
 import domain.tools.SetToolboxImpl;
 import domain.validation.ValidationResult;
@@ -88,6 +92,7 @@ public class LevelGrader {
 
     private int runTestCases(LevelTestData.Problem problem, Class<?> solutionClass) {
         int passed = 0;
+        Long timeLimitMs = problem.getValidationOrDefault().getTimeLimitMs();
 
         for (LevelTestData.TestCase testCase : problem.getTestCases()) {
             try {
@@ -96,13 +101,14 @@ public class LevelGrader {
 
                 Method method = findMethod(solutionClass, problem.getMethodName());
 
-                Object actual;
-                if (problem.isRequiresToolbox()) {
-                    // SetToolbox를 두 번째 파라미터로 주입
-                    SetToolbox<?> toolbox = new SetToolboxImpl<>();
-                    actual = method.invoke(null, input, toolbox);
-                } else {
-                    actual = method.invoke(null, input);
+                long startTime = System.nanoTime();
+                Object actual = invokeWithToolbox(method, input, problem.getRequiresToolbox());
+                long elapsedMs = (System.nanoTime() - startTime) / 1_000_000;
+
+                // 시간 제한 체크
+                if (timeLimitMs != null && elapsedMs > timeLimitMs) {
+                    System.out.println("  ⏱️ 시간 초과 (" + elapsedMs + "ms > " + timeLimitMs + "ms)");
+                    continue;
                 }
 
                 if (compareResults(expected, actual)) {
@@ -114,6 +120,30 @@ public class LevelGrader {
         }
 
         return passed;
+    }
+
+    private Object invokeWithToolbox(Method method, Object input, String toolboxType) throws Exception {
+        if (toolboxType == null) {
+            return method.invoke(null, input);
+        }
+
+        return switch (toolboxType) {
+            case "set" -> {
+                SetToolbox<?> toolbox = new SetToolboxImpl<>();
+                yield method.invoke(null, input, toolbox);
+            }
+            case "permutation" -> {
+                PermutationToolbox<?> toolbox = new PermutationToolboxImpl<>();
+                yield method.invoke(null, input, toolbox);
+            }
+            case "goldbach" -> {
+                // input이 maxN 값
+                int maxN = input instanceof Number ? ((Number) input).intValue() : 1_000_000;
+                GoldbachToolbox toolbox = new GoldbachToolboxImpl(maxN);
+                yield method.invoke(null, input, toolbox);
+            }
+            default -> method.invoke(null, input);
+        };
     }
 
     private Object prepareInput(String inputType, LevelTestData.TestCase testCase) {

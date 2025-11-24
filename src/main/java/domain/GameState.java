@@ -10,6 +10,7 @@ public enum GameState {
     TUTORIAL(HandlerConfig.createTutorialHandler()),
     MAIN(HandlerConfig.createMainHandler()),
     LEVEL(HandlerConfig.createLevelHandler()),
+    SECRET(HandlerConfig.createSecretHandler()),
     EXIT(new ExitHandler());
 
     private final StateHandler handler;

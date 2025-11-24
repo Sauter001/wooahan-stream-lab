@@ -129,7 +129,7 @@
       "inputType": "integerSet",
       "outputType": "Set<Set<Integer>>",
       "validation": { "maxVariables": 0 },
-      "requiresToolbox": true,
+      "requiresToolbox": "set",
       "testCases": [
         {
           "inputRaw": [1, 2],

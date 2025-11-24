@@ -31,6 +31,12 @@ public class LevelGraderObserver implements GraderObserver {
     private static final long DEBOUNCE_DELAY_SECONDS = 2;
     private static final List<Integer> FIBONACCI_7 = List.of(1, 1, 2, 3, 5, 8, 13);
 
+    // Secret Phase (Level 6) 전용 경로
+    private static final int SECRET_LEVEL = 6;
+    private static final String SECRET_SOLUTION_CLASS = "solutions.secret.LevelSecret";
+    private static final String SECRET_TEST_DATA_PATH = "data/test-data/secret/secret.json";
+    private static final String SECRET_FILE_NAME = "LevelSecret.java";
+
     private final int level;
     private final LevelTestData testData;
     private final LevelGradingView view;
@@ -47,11 +53,15 @@ public class LevelGraderObserver implements GraderObserver {
         this.view = view;
         this.gameContext = gameContext;
         this.profileRepository = profileRepository;
-        this.expectedFileName = String.format(LEVEL_FILE_PATTERN, level);
+        this.expectedFileName = level == SECRET_LEVEL
+                ? SECRET_FILE_NAME
+                : String.format(LEVEL_FILE_PATTERN, level);
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String testDataPath = String.format(TEST_DATA_PATTERN, level, level);
+            String testDataPath = level == SECRET_LEVEL
+                    ? SECRET_TEST_DATA_PATH
+                    : String.format(TEST_DATA_PATTERN, level, level);
             this.testData = mapper.readValue(new File(testDataPath), LevelTestData.class);
 
             this.scheduler = Executors.newSingleThreadScheduledExecutor(r -> {
@@ -175,7 +185,9 @@ public class LevelGraderObserver implements GraderObserver {
     private Class<?> loadSolutionClass() throws Exception {
         cleanUpClassLoader();
 
-        String className = String.format(SOLUTION_CLASS_PATTERN, level, level);
+        String className = level == SECRET_LEVEL
+                ? SECRET_SOLUTION_CLASS
+                : String.format(SOLUTION_CLASS_PATTERN, level, level);
         String classFilePath = className.replace('.', '/') + ".class";
 
         Path classesDir = Paths.get("build/classes/java/main").toAbsolutePath();

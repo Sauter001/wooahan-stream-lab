@@ -4,6 +4,7 @@ import handler.IntroHandler;
 import handler.LevelHandler;
 import handler.MainHandler;
 import handler.ProfileHandler;
+import handler.SecretHandler;
 import handler.TutorialHandler;
 import repository.LevelDataRepository;
 import repository.ProfileRepository;
@@ -11,6 +12,7 @@ import ui.view.common.CommonConsoleView;
 import ui.view.level.LevelConsoleView;
 import ui.view.main.MainConsoleView;
 import ui.view.profile.ProfileConsoleView;
+import ui.view.secret.SecretConsoleView;
 import ui.view.tutorial.TutorialConsoleView;
 
 public class HandlerConfig {
@@ -32,5 +34,9 @@ public class HandlerConfig {
 
     public static LevelHandler createLevelHandler() {
         return new LevelHandler(new LevelConsoleView(), new LevelDataRepository(), new ProfileRepository());
+    }
+
+    public static SecretHandler createSecretHandler() {
+        return new SecretHandler(new SecretConsoleView(), new LevelDataRepository(), new ProfileRepository());
     }
 }

@@ -47,11 +47,11 @@ public class MainHandler implements StateHandler {
             case "p", "play" -> GameState.LEVEL;
             case "s", "secret" -> {
                 if (currentProfile.isSecretUnlocked()) {
-                    System.out.println("Secret Phase는 아직 구현되지 않았습니다.");
+                    yield GameState.SECRET;
                 } else {
                     System.out.println("잘못된 명령입니다.");
+                    yield null;
                 }
-                yield null;
             }
             case "a", "achievement" -> {
                 System.out.println("도전과제 기능은 아직 구현되지 않았습니다.");

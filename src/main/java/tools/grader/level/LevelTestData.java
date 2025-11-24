@@ -63,7 +63,7 @@ public class LevelTestData {
         private ValidationConfig validation;
 
         @JsonProperty("requiresToolbox")
-        private boolean requiresToolbox = false;
+        private String requiresToolbox = null;  // "set", "permutation", "goldbach" 등
 
         /**
          * validation이 null이면 기본값 반환 (헬퍼 메소드 0개, 변수 선언 0개)
@@ -76,6 +76,7 @@ public class LevelTestData {
     /**
      * 문제별 validation 설정
      * - maxVariables: 허용되는 변수 선언 수 (기본 0, 순수 return 한 줄)
+     * - timeLimitMs: 실행 시간 제한 (null이면 제한 없음)
      *
      * 헬퍼 메소드가 필요한 경우 인터페이스/유틸 클래스로 제공됨
      */
@@ -85,6 +86,9 @@ public class LevelTestData {
         @JsonProperty("maxVariables")
         private int maxVariables = 0;
 
+        @JsonProperty("timeLimitMs")
+        private Long timeLimitMs = null;  // null이면 시간 제한 없음
+
         public static ValidationConfig strictDefault() {
             return new ValidationConfig();
         }
@@ -92,6 +96,13 @@ public class LevelTestData {
         public static ValidationConfig of(int maxVariables) {
             ValidationConfig config = new ValidationConfig();
             config.maxVariables = maxVariables;
+            return config;
+        }
+
+        public static ValidationConfig of(int maxVariables, long timeLimitMs) {
+            ValidationConfig config = new ValidationConfig();
+            config.maxVariables = maxVariables;
+            config.timeLimitMs = timeLimitMs;
             return config;
         }
     }
