@@ -49,7 +49,7 @@ public class LevelHandler implements StateHandler {
 
         view.showLevelIntro(levelInfo, showDialogue);
 
-        if (showDialogue) {
+        if (!showDialogue) {
             profile.markLevelDialogueShown(levelKey);
             profileRepository.save(profile);
         }

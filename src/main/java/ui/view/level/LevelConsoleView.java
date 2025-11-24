@@ -88,6 +88,8 @@ public class LevelConsoleView implements LevelView {
         System.out.println("  [M/main] 메인 메뉴로 돌아가기");
         System.out.println("──────────────────────────────────────────────────");
         System.out.println();
+        String filePath = String.format("src/main/java/solutions/level%d/Level%d.java", level, level);
+        System.out.printf("📂 %s%n", filePath);
         System.out.println("파일을 수정하고 저장(Ctrl + S)하면 자동으로 채점됩니다.");
         System.out.printf("Level %d 진행 중... (파일 감시 중)%n", level);
     }

@@ -80,6 +80,7 @@ public class GameContext {
         clearCurrentObserver();
         currentObserver = new LevelGraderObserver(currentLevel, levelGradingView, this, profileRepository);
         fileWatcher.addObserver(currentObserver);
+        levelGradingView.displayWatcherStarted(currentLevel);
     }
 
     private void clearCurrentObserver() {
