@@ -10,7 +10,6 @@ public class Tutorial {
      * @return 짝수로 구성된 리스트
      */
     public static List<Integer> findEvenNumbers(List<Integer> numbers) {
-//        throw new UnsupportedOperationException("구현 필요");
         return numbers.stream()
                 .filter(n -> n % 2 == 0)
                 .toList();
